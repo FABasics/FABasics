@@ -19,3 +19,16 @@ function scrollToTopic(topicTitle) {
 
     // ... (rest of the scrolling and pulse animation code) ...
 }
+} else {
+        // CASE B: No Local Topic Found (Offer to Google Search)
+        searchResults.innerHTML = `
+            <div class="no-results">
+                <p>Couldn't find an exact match in our guide.</p>
+                <button class="google-search-button" onclick="searchGoogle('${searchTerm}')">
+                    🔍 Ask AI: Search for "${searchTerm}"
+                </button>
+            </div>
+        `;
+        searchResults.classList.add('active');
+    }
+});
