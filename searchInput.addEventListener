@@ -1,0 +1,49 @@
+searchInput.addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    
+    // 1. Always show/hide the main grid topics based on the search term
+    topicItems.forEach(item => {
+        const itemKeywords = item.getAttribute('data-keywords').toLowerCase();
+        if (itemKeywords.includes(searchTerm) || searchTerm.length === 0) {
+            item.style.display = 'block'; // Show if matches or search is empty
+        } else {
+            item.style.display = 'none'; // Hide if no match
+        }
+    });
+
+    // Handle the floating search results box (for auto-suggest/AI)
+    if (searchTerm.length === 0) {
+        searchResults.classList.remove('active');
+        return;
+    }
+
+    const filteredTopics = topics.filter(topic => {
+        return topic.title.toLowerCase().includes(searchTerm) ||
+               topic.description.toLowerCase().includes(searchTerm) ||
+               topic.keywords.toLowerCase().includes(searchTerm);
+    });
+
+    if (filteredTopics.length > 0) {
+        // CASE A: Local Topic Found (Show local suggestions)
+        searchResults.innerHTML = filteredTopics.map(topic => `
+            <div class="search-result-item" onclick="scrollToTopic('${topic.title}')">
+                <div class="result-title">${highlightText(topic.title, searchTerm)}</div>
+                <div class="result-description">${highlightText(topic.description, searchTerm)}</div>
+            </div>
+        `).join('');
+        searchResults.classList.add('active');
+    } else {
+        // CASE B: No Local Topic Found (Offer to Google Search)
+        searchResults.innerHTML = `
+            <div class="no-results">
+                <p>Couldn't find an exact match in our guide.</p>
+                <button class="google-search-button" onclick="searchGoogle('${searchTerm}')">
+                    🔍 Ask AI: Search for "${searchTerm}"
+                </button>
+            </div>
+        `;
+        searchResults.classList.add('active');
+    }
+});
+
+// ... (keep the highlightText and scrollToTopic functions) ...
