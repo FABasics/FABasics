@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shark Tank - FinLearn</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function calculateValuation() {
+      let offer = document.getElementById('offer').value;
+      let equity = document.getElementById('equity').value;
+      if (offer && equity) {
+        let valuation = (offer / (equity/100)).toFixed(2);
+        document.getElementById('valuation').innerText = "Implied Valuation: $" + valuation;
+      }
+    }
+  </script>
+</head>
+<body>
+<header>
+  <h1>Shark Tank Concepts</h1>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="courses.html">Courses</a>
+  <a href="glossary.html">Glossary</a>
+  <a href="sharktank.html">Shark Tank</a>
+  <a href="contact.html">Contact</a>
+</nav>
+<div class="container">
+  <h2>Key Terms</h2>
+  <ul>
+    <li><b>Valuation</b>: Total worth of a company based on investment and equity offered.</li>
+    <li><b>Equity Stake</b>: The percentage of ownership sold to investors.</li>
+    <li><b>Revenue Multiple</b>: Valuation divided by revenue.</li>
+    <li><b>Burn Rate</b>: The speed at which a startup spends its cash.</li>
+  </ul>
+  <h2>Valuation Calculator</h2>
+  <label>Investment Offer ($):</label><br>
+  <input type="number" id="offer" placeholder="e.g. 100000"><br>
+  <label>Equity Percentage (%):</label><br>
+  <input type="number" id="equity" placeholder="e.g. 10"><br>
+  <button onclick="calculateValuation()">Calculate</button>
+  <p id="valuation"></p>
+</div>
+</body>
+</html>

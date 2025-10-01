@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Glossary - FinLearn</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    const glossary = [
+      {term: "Asset", definition: "A resource with economic value owned by a company."},
+      {term: "Liability", definition: "An obligation that a company owes to others."},
+      {term: "Equity", definition: "The owner's claim after liabilities are deducted from assets."},
+      {term: "Balance Sheet", definition: "A statement showing assets, liabilities, and equity at a point in time."},
+      {term: "Cash Flow", definition: "The movement of money in and out of a business."},
+      {term: "Revenue", definition: "Total income earned by a business from operations."},
+      {term: "Expense", definition: "Costs incurred to earn revenue."},
+      {term: "Profit", definition: "Revenue minus expenses."},
+      {term: "Depreciation", definition: "Allocation of cost of an asset over its useful life."},
+      {term: "Dividend", definition: "Profit distributed to shareholders."}
+    ];
+    function searchGlossary() {
+      let query = document.getElementById('search').value.toLowerCase();
+      let resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+      let results = glossary.filter(item => item.term.toLowerCase().includes(query));
+      if(results.length === 0){
+        resultsDiv.innerHTML = "<p>No terms found.</p>";
+      } else {
+        results.forEach(item => {
+          resultsDiv.innerHTML += `<div class='glossary-item'><b>${item.term}</b>: ${item.definition}</div>`;
+        });
+      }
+    }
+    window.onload = () => searchGlossary();
+  </script>
+</head>
+<body>
+<header>
+  <h1>Glossary</h1>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="courses.html">Courses</a>
+  <a href="glossary.html">Glossary</a>
+  <a href="sharktank.html">Shark Tank</a>
+  <a href="contact.html">Contact</a>
+</nav>
+<div class="container">
+  <h2>Search Financial Terms</h2>
+  <input type="text" id="search" placeholder="Type a term..." onkeyup="searchGlossary()">
+  <div id="results"></div>
+</div>
+</body>
+</html>
