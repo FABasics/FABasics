@@ -1,266 +1,9 @@
-
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">FinLearn</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#topics">Topics</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hero" id="home">
-        <h1>Financial Accounting Made Easy</h1>
-        <p>Free tutorials, examples, and guides on accounting principles, double-entry bookkeeping, and financial statement preparation</p>
-        
-        <div class="search-container">
-            <div class="search-wrapper">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search accounting topics, concepts, or ask a question...">
-                <span class="ai-badge">AI Search</span>
-            </div>
-            <div class="search-results" id="searchResults"></div>
-        </div>
-        
-        <a href="#topics" class="cta-button">Start Learning</a>
-    </section>
-
-    <div class="container" id="features">
-        <h2 class="section-title">Why Choose FinLearn?</h2>
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3>Comprehensive Content</h3>
-                <p>From basic bookkeeping to advanced financial statements, we cover everything you need to master financial accounting.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💡</div>
-                <h3>Easy to Understand</h3>
-                <p>Complex concepts explained in simple language with practical examples and real-world scenarios.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🆓</div>
-                <h3>100% Free</h3>
-                <p>All resources are completely free. No hidden costs, no subscriptions. Just pure learning.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Quick Reference</h3>
-                <p>Find what you need fast with our organized topics and searchable content structure.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>Practical Examples</h3>
-                <p>Learn by doing with step-by-step examples and practice scenarios from real business situations.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Visual Learning</h3>
-                <p>Charts, diagrams, and visual aids to help you understand and remember key concepts.</p>
-            </div>
-        </div>
-    </div>
-
-    <section class="topics" id="topics">
-        <div class="container">
-            <h2 class="section-title">Explore Topics</h2>
-            <div class="topic-grid" id="topicGrid">
-                <div class="topic-item" data-keywords="accounting basics fundamentals principles concepts introduction">
-                    <h4>Accounting Basics</h4>
-                    <p>Fundamental principles and concepts</p>
-                </div>
-                <div class="topic-item" data-keywords="double entry bookkeeping debit credit system">
-                    <h4>Double-Entry Bookkeeping</h4>
-                    <p>Master the core accounting system</p>
-                </div>
-                <div class="topic-item" data-keywords="journal entries transactions recording debits credits">
-                    <h4>Journal Entries</h4>
-                    <p>Record transactions correctly</p>
-                </div>
-                <div class="topic-item" data-keywords="general ledger books accounts t-accounts">
-                    <h4>General Ledger</h4>
-                    <p>Understanding the books of accounts</p>
-                </div>
-                <div class="topic-item" data-keywords="trial balance verification balancing checking">
-                    <h4>Trial Balance</h4>
-                    <p>Verify your accounting records</p>
-                </div>
-                <div class="topic-item" data-keywords="financial statements balance sheet income statement cash flow profit loss">
-                    <h4>Financial Statements</h4>
-                    <p>Balance Sheet, Income Statement, Cash Flow</p>
-                </div>
-                <div class="topic-item" data-keywords="accounts payable creditors liabilities owe payment">
-                    <h4>Accounts Payable</h4>
-                    <p>Managing what you owe</p>
-                </div>
-                <div class="topic-item" data-keywords="accounts receivable debtors assets collection invoice">
-                    <h4>Accounts Receivable</h4>
-                    <p>Managing what others owe you</p>
-                </div>
-                <div class="topic-item" data-keywords="depreciation asset valuation amortization wear tear">
-                    <h4>Depreciation</h4>
-                    <p>Asset valuation over time</p>
-                </div>
-                <div class="topic-item" data-keywords="inventory accounting fifo lifo weighted average stock">
-                    <h4>Inventory Accounting</h4>
-                    <p>FIFO, LIFO, and weighted average</p>
-                </div>
-                <div class="topic-item" data-keywords="bank reconciliation matching statements verification">
-                    <h4>Bank Reconciliation</h4>
-                    <p>Match your records with bank statements</p>
-                </div>
-                <div class="topic-item" data-keywords="financial analysis ratios metrics performance liquidity profitability">
-                    <h4>Financial Analysis</h4>
-                    <p>Ratios and performance metrics</p>
-                </div>
-            </div>
-
-    <script>
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-        const topicItems = document.querySelectorAll('.topic-item');
-
-        const topics = [
-            {
-                title: "Accounting Basics",
-                description: "Learn fundamental accounting principles, concepts, and the accounting equation (Assets = Liabilities + Equity)",
-                keywords: "accounting basics fundamentals principles concepts introduction equation"
-            },
-            {
-                title: "Double-Entry Bookkeeping",
-                description: "Understand the core accounting system where every transaction affects at least two accounts",
-                keywords: "double entry bookkeeping debit credit system dual aspect"
-            },
-            {
-                title: "Journal Entries",
-                description: "Learn how to record business transactions with proper debits and credits in chronological order",
-                keywords: "journal entries transactions recording debits credits posting"
-            },
-            {
-                title: "General Ledger",
-                description: "Master the main accounting record that contains all accounts and their balances",
-                keywords: "general ledger books accounts t-accounts posting ledger accounts"
-            },
-            {
-                title: "Trial Balance",
-                description: "Verify accounting accuracy by ensuring total debits equal total credits",
-                keywords: "trial balance verification balancing checking accuracy errors"
-            },
-            {
-                title: "Financial Statements",
-                description: "Create and interpret Balance Sheets, Income Statements, and Cash Flow Statements",
-                keywords: "financial statements balance sheet income statement cash flow profit loss P&L"
-            },
-            {
-                title: "Accounts Payable",
-                description: "Manage money owed to suppliers and creditors, track payment schedules",
-                keywords: "accounts payable creditors liabilities owe payment vendors suppliers"
-            },
-            {
-                title: "Accounts Receivable",
-                description: "Track money owed by customers, manage collections and credit policies",
-                keywords: "accounts receivable debtors assets collection invoice customers AR"
-            },
-            {
-                title: "Depreciation",
-                description: "Calculate asset value reduction over time using straight-line, declining balance methods",
-                keywords: "depreciation asset valuation amortization wear tear fixed assets"
-            },
-            {
-                title: "Inventory Accounting",
-                description: "Learn FIFO, LIFO, and weighted average methods for inventory valuation",
-                keywords: "inventory accounting fifo lifo weighted average stock merchandise goods"
-            },
-            {
-                title: "Bank Reconciliation",
-                description: "Match your accounting records with bank statements to identify discrepancies",
-                keywords: "bank reconciliation matching statements verification cash checking"
-            },
-            {
-                title: "Financial Analysis",
-                description: "Analyze company performance using liquidity, profitability, and efficiency ratios",
-                keywords: "financial analysis ratios metrics performance liquidity profitability solvency"
-            }
-        ];
-
-        searchInput.addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            
-            if (searchTerm.length === 0) {
-                searchResults.classList.remove('active');
-                return;
-            }
-
-            const filteredTopics = topics.filter(topic => {
-                return topic.title.toLowerCase().includes(searchTerm) ||
-                       topic.description.toLowerCase().includes(searchTerm) ||
-                       topic.keywords.toLowerCase().includes(searchTerm);
-            });
-
-            if (filteredTopics.length > 0) {
-                searchResults.innerHTML = filteredTopics.map(topic => `
-                    <div class="search-result-item" onclick="scrollToTopic('${topic.title}')">
-                        <div class="result-title">${highlightText(topic.title, searchTerm)}</div>
-                        <div class="result-description">${highlightText(topic.description, searchTerm)}</div>
-                    </div>
-                `).join('');
-                searchResults.classList.add('active');
-            } else {
-                searchResults.innerHTML = '<div class="no-results">No topics found. Try searching for "journal entries", "balance sheet", or "depreciation"</div>';
-                searchResults.classList.add('active');
-            }
-        });
-
-        function highlightText(text, searchTerm) {
-            const regex = new RegExp(`(${searchTerm})`, 'gi');
-            return text.replace(regex, '<strong>$1</strong>');
-        }
-
-        function scrollToTopic(topicTitle) {
-            searchResults.classList.remove('active');
-            searchInput.value = '';
-            
-            const topicSection = document.getElementById('topics');
-            topicSection.scrollIntoView({ behavior: 'smooth' });
-            
-            setTimeout(() => {
-                topicItems.forEach(item => {
-                    if (item.querySelector('h4').textContent === topicTitle) {
-                        item.style.animation = 'pulse 1s';
-                        setTimeout(() => item.style.animation = '', 1000);
-                    }
-                });
-            }, 800);
-        }
-
-        document.addEventListener('click', function(e) {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.classList.remove('active');
-            }
-        });
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0%, 100% { transform: scale(1); }
-                50% { transform: scale(1.05); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinLearn - Advanced Financial Accounting & Business Terms</title>
+    <title>FinLearn - Financial Accounting & Business Terms</title>
     <style>
         * {
             margin: 0;
@@ -303,12 +46,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            cursor: pointer;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         .nav-links a {
@@ -323,45 +67,23 @@
 
         .nav-links a:hover, .nav-links a.active {
             color: #00d4ff;
-            background: rgba(0, 123, 255, 0.1);
+            background: rgba(0, 123, 255, 0.2);
             transform: translateY(-2px);
         }
 
         .hero {
             background: linear-gradient(135deg, #0f1b4c 0%, #1a2875 50%, #0a0e27 100%);
             color: white;
-            padding: 180px 2rem 120px;
+            padding: 150px 2rem 100px;
             text-align: center;
             margin-top: 70px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 123, 255, 0.1) 0%, transparent 50%);
-            animation: pulse 4s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s;
             background: linear-gradient(135deg, #ffffff, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -369,17 +91,39 @@
         }
 
         .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 1.2s;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
             color: #b0c4de;
         }
 
         .search-container {
             max-width: 900px;
-            margin: 3rem auto 0;
-            animation: fadeInUp 1.4s;
+            margin: 2rem auto 0;
             position: relative;
+        }
+
+        .search-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-tab {
+            background: rgba(0, 123, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #007bff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .search-tab:hover, .search-tab.active {
+            background: linear-gradient(135deg, #007bff 0%, #00d4ff 100%);
+            color: white;
+            transform: translateY(-2px);
         }
 
         .search-wrapper {
@@ -401,16 +145,15 @@
 
         .search-icon {
             font-size: 1.5rem;
-            margin-right: 1.5rem;
-            filter: drop-shadow(0 0 10px #00d4ff);
+            margin-right: 1rem;
         }
 
         #searchInput {
             flex: 1;
             border: none;
             outline: none;
-            font-size: 1.2rem;
-            padding: 1rem 0;
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
             color: #ffffff;
             background: transparent;
         }
@@ -422,18 +165,11 @@
         .ai-badge {
             background: linear-gradient(135deg, #007bff 0%, #00d4ff 100%);
             color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
             font-weight: bold;
-            margin-left: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
-            animation: glow 2s infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5); }
-            50% { box-shadow: 0 5px 25px rgba(0, 212, 255, 0.8); }
+            margin-left: 1rem;
         }
 
         .search-results {
@@ -467,18 +203,6 @@
 
         .search-results.active {
             display: block;
-            animation: slideDown 0.3s;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .search-result-item {
@@ -489,12 +213,8 @@
         }
 
         .search-result-item:hover {
-            background: rgba(0, 123, 255, 0.1);
+            background: rgba(0, 123, 255, 0.15);
             border-left: 4px solid #00d4ff;
-        }
-
-        .search-result-item:last-child {
-            border-bottom: none;
         }
 
         .result-title {
@@ -507,46 +227,51 @@
         .result-description {
             color: #b0c4de;
             font-size: 1rem;
-            line-height: 1.6;
         }
 
         .result-category {
             display: inline-block;
-            background: rgba(0, 123, 255, 0.2);
+            background: rgba(0, 123, 255, 0.3);
             color: #00d4ff;
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 0.5rem;
         }
 
         .no-results {
-            padding: 3rem;
+            padding: 2rem;
             text-align: center;
             color: #b0c4de;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .google-search-btn {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .google-search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 5rem 2rem;
+            padding: 4rem 2rem;
         }
 
         .section-title {
             text-align: center;
-            font-size: 3rem;
-            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
             background: linear-gradient(135deg, #ffffff, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -555,155 +280,91 @@
 
         .content-section {
             display: none;
-            animation: fadeIn 0.5s;
         }
 
         .content-section.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .alphabet-nav {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .alphabet-nav button {
-            background: linear-gradient(135deg, #1a2875 0%, #0f1b4c 100%);
-            color: #00d4ff;
-            border: 2px solid rgba(0, 123, 255, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .alphabet-nav button:hover {
-            background: rgba(0, 123, 255, 0.2);
-            border-color: #00d4ff;
-            transform: scale(1.1);
-        }
-
         .glossary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 2rem;
         }
 
-        .glossary-item {
+        .term-card {
             background: linear-gradient(135deg, #0f1b4c 0%, #1a2875 100%);
             padding: 2rem;
             border-radius: 15px;
             border: 2px solid rgba(0, 123, 255, 0.3);
-            transition: all 0.4s;
+            transition: all 0.3s;
         }
 
-        .glossary-item:hover {
+        .term-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
             border-color: #00d4ff;
         }
 
-        .glossary-item h3 {
+        .term-card h3 {
             color: #00d4ff;
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
-        .glossary-item .category-tag {
-            display: inline-block;
-            background: rgba(0, 123, 255, 0.2);
-            color: #00d4ff;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-        }
-
-        .glossary-item p {
+        .term-card .definition {
             color: #b0c4de;
-            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .term-card .detailed {
+            color: #9ca3af;
+            line-height: 1.7;
             margin-bottom: 1rem;
         }
 
-        .glossary-item .example {
-            background: rgba(0, 123, 255, 0.05);
+        .term-card .example {
+            background: rgba(0, 123, 255, 0.1);
             padding: 1rem;
             border-radius: 8px;
             border-left: 4px solid #007bff;
             margin-top: 1rem;
         }
 
-        .glossary-item .example strong {
+        .example-title {
             color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: rgba(0, 123, 255, 0.3);
+            color: #00d4ff;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
         }
 
         footer {
             background: linear-gradient(135deg, #000000 0%, #0f1b4c 100%);
             color: #b0c4de;
             text-align: center;
-            padding: 3rem;
-            margin-top: 5rem;
+            padding: 2rem;
+            margin-top: 4rem;
             border-top: 2px solid #007bff;
-        }
-
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 1.5rem 2rem;
-            background: linear-gradient(135deg, #1a2875 0%, #0f1b4c 100%);
-            border-radius: 15px;
-            border: 2px solid rgba(0, 123, 255, 0.3);
-        }
-
-        .stat-item .number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #00d4ff;
-        }
-
-        .stat-item .label {
-            color: #b0c4de;
-            margin-top: 0.5rem;
         }
 
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
             }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
             .nav-links {
-                gap: 1rem;
+                gap: 0.5rem;
                 font-size: 0.85rem;
             }
-
-            .search-wrapper {
-                padding: 0.5rem 1rem;
-            }
-
-            #searchInput {
-                font-size: 0.95rem;
-            }
-
             .glossary-grid {
                 grid-template-columns: 1fr;
             }
@@ -713,296 +374,383 @@
 <body>
     <header>
         <nav>
-            <div class="logo">🚀 FinLearn</div>
+            <div class="logo" onclick="showSection('home')">🚀 FinLearn</div>
             <ul class="nav-links">
-                <li><a class="nav-link active" data-section="home">Home</a></li>
-                <li><a class="nav-link" data-section="accounting">Accounting Terms</a></li>
-                <li><a class="nav-link" data-section="shark-tank">Shark Tank Terms</a></li>
-                <li><a class="nav-link" data-section="analysis">Financial Analysis</a></li>
+                <li><a class="nav-link active" onclick="showSection('home')">Home</a></li>
+                <li><a class="nav-link" onclick="showSection('accounting')">Accounting</a></li>
+                <li><a class="nav-link" onclick="showSection('shark-tank')">Shark Tank</a></li>
+                <li><a class="nav-link" onclick="showSection('analysis')">Analysis</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>Advanced Financial Intelligence</h1>
-            <p>100+ Financial Accounting Terms, Business Valuations & Shark Tank Investment Concepts</p>
-            
-            <div class="search-container">
-                <div class="search-wrapper">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" placeholder="Search any term: EBITDA, Equity, Depreciation, ROI...">
-                    <span class="ai-badge">AI POWERED</span>
-                </div>
-                <div class="search-results" id="searchResults"></div>
+        <h1>Financial Intelligence Hub</h1>
+        <p>Master 100+ Financial Terms with AI-Powered Search + Google Integration</p>
+        
+        <div class="search-container">
+            <div class="search-tabs">
+                <div class="search-tab active" onclick="setSearchMode('site')">📚 Search Site</div>
+                <div class="search-tab" onclick="setSearchMode('google')">🌐 Google Search</div>
             </div>
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search financial terms... (try: goodwill, cash flow, equity)">
+                <span class="ai-badge" id="searchBadge">AI SEARCH</span>
+            </div>
+            <div class="search-results" id="searchResults"></div>
         </div>
     </section>
 
-    <!-- HOME SECTION -->
+    <!-- HOME -->
     <div class="content-section active" id="home-section">
         <div class="container">
-            <div class="stats-bar">
-                <div class="stat-item">
-                    <div class="number">100+</div>
-                    <div class="label">Financial Terms</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">50+</div>
-                    <div class="label">Shark Tank Concepts</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">30+</div>
-                    <div class="label">Analysis Ratios</div>
-                </div>
-            </div>
-
-            <h2 class="section-title">What You'll Master</h2>
+            <h2 class="section-title">Welcome to FinLearn</h2>
             <div class="glossary-grid">
-                <div class="glossary-item">
-                    <h3>📊 Financial Accounting</h3>
-                    <span class="category-tag">Core Concepts</span>
-                    <p>Master fundamental accounting principles including the accounting equation, double-entry bookkeeping, journal entries, and financial statement preparation.</p>
-                    <div class="example">
-                        <strong>Key Topics:</strong> Assets = Liabilities + Equity, Debits & Credits, T-Accounts, Trial Balance, Balance Sheet, Income Statement
-                    </div>
+                <div class="term-card">
+                    <span class="category-badge">Feature</span>
+                    <h3>🔍 Dual Search System</h3>
+                    <p class="definition">Search our database OR Google for any financial term</p>
+                    <p class="detailed">Toggle between our curated 100+ term database for quick definitions, or use Google integration for extensive research and external resources.</p>
                 </div>
-
-                <div class="glossary-item">
-                    <h3>🦈 Shark Tank Business Terms</h3>
-                    <span class="category-tag">Investment & Valuation</span>
-                    <p>Learn the investment terminology used on Shark Tank including equity deals, valuations, royalty agreements, and deal structures.</p>
-                    <div class="example">
-                        <strong>Example:</strong> "$200,000 for 25% equity" means the business is valued at $800,000. The investor owns 1/4 of the company.
-                    </div>
+                <div class="term-card">
+                    <span class="category-badge">100+ Terms</span>
+                    <h3>📊 Complete Glossary</h3>
+                    <p class="definition">Accounting, Shark Tank, and Financial Analysis terms</p>
+                    <p class="detailed">Comprehensive coverage of essential business terminology with clear definitions, examples, and real-world applications.</p>
                 </div>
-
-                <div class="glossary-item">
-                    <h3>📈 Financial Analysis</h3>
-                    <span class="category-tag">Ratios & Metrics</span>
-                    <p>Analyze company performance using liquidity ratios, profitability metrics, efficiency ratios, and leverage calculations.</p>
-                    <div class="example">
-                        <strong>Popular Ratios:</strong> ROI, ROE, Current Ratio, Quick Ratio, Debt-to-Equity, Gross Margin, Net Margin
-                    </div>
+                <div class="term-card">
+                    <span class="category-badge">Navigation</span>
+                    <h3>🎯 Easy Access</h3>
+                    <p class="definition">Click any tab above to explore different categories</p>
+                    <p class="detailed">Browse by category: Accounting fundamentals, Shark Tank investment terms, or Financial analysis metrics. All fully searchable!</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ACCOUNTING TERMS SECTION -->
+    <!-- ACCOUNTING -->
     <div class="content-section" id="accounting-section">
         <div class="container">
-            <h2 class="section-title">Accounting Terms Glossary</h2>
-            
-            <div class="alphabet-nav" id="alphabetNav"></div>
-            
+            <h2 class="section-title">📊 Accounting Terms</h2>
             <div class="glossary-grid" id="accountingGlossary"></div>
         </div>
     </div>
 
-    <!-- SHARK TANK SECTION -->
+    <!-- SHARK TANK -->
     <div class="content-section" id="shark-tank-section">
         <div class="container">
-            <h2 class="section-title">🦈 Shark Tank Investment Terms</h2>
-            
+            <h2 class="section-title">🦈 Shark Tank Terms</h2>
             <div class="glossary-grid" id="sharkTankGlossary"></div>
         </div>
     </div>
 
-    <!-- FINANCIAL ANALYSIS SECTION -->
+    <!-- ANALYSIS -->
     <div class="content-section" id="analysis-section">
         <div class="container">
-            <h2 class="section-title">📈 Financial Analysis Terms</h2>
-            
+            <h2 class="section-title">📈 Financial Analysis</h2>
             <div class="glossary-grid" id="analysisGlossary"></div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 FinLearn. All rights reserved. | Free Financial Accounting Education</p>
-        <p style="margin-top: 1rem; color: #6b7280;">100+ Terms | AI-Powered Search | Completely Free</p>
+        <p>&copy; 2025 FinLearn | Free Financial Education Platform</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Version 1.0 - Fully Functional with Google Integration</p>
     </footer>
 
     <script>
-        // COMPREHENSIVE GLOSSARY DATABASE
-        const glossary = [
+        // COMPLETE GLOSSARY DATABASE
+        const glossaryData = [
             // ACCOUNTING TERMS
-            {
-                term: "Accounting Equation",
-                category: "Accounting",
-                definition: "The fundamental principle that Assets = Liabilities + Equity. This equation must always balance.",
-                detailed: "Every transaction affects at least two accounts to maintain this balance. Assets are what you own, Liabilities are what you owe, and Equity is the owner's stake.",
-                example: "If a company has $100,000 in assets and $30,000 in liabilities, equity must be $70,000 to balance the equation.",
-                keywords: "assets liabilities equity balance fundamental equation basic"
-            },
             {
                 term: "Accounts Payable",
                 category: "Accounting",
-                definition: "Money a business owes to suppliers or vendors for goods/services purchased on credit.",
-                detailed: "AP appears as a current liability on the balance sheet. Managing AP effectively helps maintain good supplier relationships and optimize cash flow.",
-                example: "You buy $5,000 worth of inventory on 30-day credit terms. This creates a $5,000 accounts payable that must be paid within 30 days.",
-                keywords: "payable creditors vendors suppliers liability owe debt"
+                definition: "Money owed to suppliers for goods/services purchased on credit",
+                detailed: "Short-term liability representing amounts owed to vendors. Managing AP effectively optimizes cash flow while maintaining supplier relationships.",
+                example: "Order $10,000 inventory with Net 30 terms. Until paid, this is Accounts Payable.",
+                keywords: "payable ap vendor supplier creditor owe debt"
             },
             {
                 term: "Accounts Receivable",
                 category: "Accounting",
-                definition: "Money owed to a business by customers for goods/services sold on credit.",
-                detailed: "AR is a current asset on the balance sheet. It represents future cash inflows. Companies must manage collections to avoid bad debts.",
-                example: "You sell $10,000 of products on 60-day terms. This creates a $10,000 accounts receivable asset until the customer pays.",
-                keywords: "receivable debtors customers collection asset owe invoice"
+                definition: "Money owed by customers for goods/services sold on credit",
+                detailed: "Current asset representing future cash inflows. Track aging (30/60/90 days) to monitor collection efficiency.",
+                example: "Sell $5,000 on 30-day terms. This $5,000 is AR until customer pays.",
+                keywords: "receivable ar customer debtor invoice collection"
             },
             {
                 term: "Accrual Accounting",
                 category: "Accounting",
-                definition: "Recording revenue when earned and expenses when incurred, regardless of cash movement.",
-                detailed: "Opposite of cash accounting. Provides more accurate picture of financial performance by matching revenues with related expenses in the same period.",
-                example: "You complete a $5,000 project in December but get paid in January. Accrual accounting records the revenue in December.",
-                keywords: "accrual recognition matching principle revenue expense"
+                definition: "Record revenue when earned and expenses when incurred, regardless of cash",
+                detailed: "Provides accurate financial picture by matching income with related expenses in the same period. Required by GAAP.",
+                example: "Complete $10K project in December, receive payment in January. Record revenue in December.",
+                keywords: "accrual earned incurred matching gaap"
             },
             {
-                term: "Amortization",
+                term: "Assets",
                 category: "Accounting",
-                definition: "Gradual reduction of an intangible asset's value or loan balance over time.",
-                detailed: "Similar to depreciation but for intangible assets like patents, copyrights, or goodwill. Also refers to paying off debt through scheduled payments.",
-                example: "A $10,000 patent with 10-year life is amortized at $1,000 per year. A loan payment includes both principal and interest amortization.",
-                keywords: "amortize intangible asset reduction loan payment schedule"
-            },
-            {
-                term: "Asset",
-                category: "Accounting",
-                definition: "A resource owned by a business that has economic value and provides future benefits.",
-                detailed: "Assets are classified as current (converted to cash within a year) or fixed (long-term). Examples include cash, inventory, equipment, buildings.",
-                example: "Cash $50,000, Inventory $30,000, Equipment $100,000, Building $500,000 - all are assets totaling $680,000.",
-                keywords: "asset resources property owned value current fixed"
+                definition: "Resources owned that provide future economic benefit",
+                detailed: "Divided into current (convertible to cash within 1 year) and non-current. Assets = Liabilities + Equity.",
+                example: "Cash $50K, Inventory $30K, Equipment $100K, Building $500K = Total Assets $680K",
+                keywords: "asset resources property value owned"
             },
             {
                 term: "Balance Sheet",
                 category: "Accounting",
-                definition: "Financial statement showing a company's assets, liabilities, and equity at a specific point in time.",
-                detailed: "Also called Statement of Financial Position. It follows the accounting equation: Assets = Liabilities + Equity. Provides snapshot of financial health.",
-                example: "Assets $1M (Cash $100K, Equipment $900K) = Liabilities $600K (Loans) + Equity $400K (Owner's Investment + Retained Earnings)",
-                keywords: "balance sheet statement position financial snapshot assets liabilities equity"
+                definition: "Financial statement showing assets, liabilities, and equity at specific date",
+                detailed: "Snapshot of financial position. Always balanced: Assets = Liabilities + Equity.",
+                example: "Assets $350K = Liabilities $200K + Equity $150K",
+                keywords: "balance sheet financial position statement"
             },
             {
-                term: "Book Value",
+                term: "Cash Flow",
                 category: "Accounting",
-                definition: "The net value of an asset on the balance sheet (original cost minus accumulated depreciation).",
-                detailed: "Also called carrying value. Represents what an asset is 'worth' on the books, not necessarily its market value.",
-                example: "Equipment purchased for $100,000 with $40,000 accumulated depreciation has a book value of $60,000.",
-                keywords: "book value carrying net worth depreciation asset value"
+                definition: "Movement of money into and out of business",
+                detailed: "Differs from profit. Shows actual cash generated/spent from operating, investing, financing activities.",
+                example: "Make $10K sale paid in 90 days. Have profit but no immediate cash flow.",
+                keywords: "cash flow movement money liquidity"
             },
             {
-                term: "Capital",
+                term: "Cost of Goods Sold",
                 category: "Accounting",
-                definition: "Money invested in a business by owners, or the total value of assets minus liabilities.",
-                detailed: "Working capital is current assets minus current liabilities. Capital can also refer to long-term investments in equipment and facilities.",
-                example: "Owner invests $50,000 cash - this becomes owner's capital. Working capital = Current Assets $80K - Current Liabilities $30K = $50K.",
-                keywords: "capital investment equity owner funds working"
-            },
-            {
-                term: "Cash Flow Statement",
-                category: "Accounting",
-                definition: "Financial statement showing cash inflows and outflows from operating, investing, and financing activities.",
-                detailed: "Shows how cash moves through the business. Operating activities (core business), Investing (assets), Financing (debt/equity).",
-                example: "Operating: +$100K from sales, -$60K expenses. Investing: -$50K equipment purchase. Financing: +$30K loan. Net cash: +$20K.",
-                keywords: "cash flow statement operating investing financing liquidity"
-            },
-            {
-                term: "Chart of Accounts",
-                category: "Accounting",
-                definition: "Complete listing of all accounts in the general ledger, organized by category.",
-                detailed: "Typically numbered systematically: 1000s = Assets, 2000s = Liabilities, 3000s = Equity, 4000s = Revenue, 5000s = Expenses.",
-                example: "1001-Cash, 1002-Accounts Receivable, 2001-Accounts Payable, 4001-Sales Revenue, 5001-Rent Expense.",
-                keywords: "chart accounts list ledger organization categories"
-            },
-            {
-                term: "Cost of Goods Sold (COGS)",
-                category: "Accounting",
-                definition: "Direct costs of producing goods sold by a company, including materials and direct labor.",
-                detailed: "COGS = Beginning Inventory + Purchases - Ending Inventory. Appears on income statement. Lower COGS means higher gross profit.",
-                example: "Started with $10K inventory, bought $50K more, ended with $15K. COGS = $10K + $50K - $15K = $45K.",
-                keywords: "cogs cost goods sold inventory production direct costs"
+                definition: "Direct costs to produce goods sold (COGS)",
+                detailed: "Includes materials, labor, overhead. Formula: Beginning Inventory + Purchases - Ending Inventory.",
+                example: "Start $20K inventory, buy $80K, end $30K. COGS = $70K",
+                keywords: "cogs cost sales manufacturing direct"
             },
             {
                 term: "Credit",
                 category: "Accounting",
-                definition: "Right side of an account in double-entry bookkeeping. Increases liabilities, equity, and revenue.",
-                detailed: "Credits decrease assets and expenses. Every transaction has equal debits and credits to maintain balance.",
-                example: "Sell product for $1,000 cash: Debit Cash $1,000, Credit Sales Revenue $1,000.",
-                keywords: "credit entry right side increase liability revenue"
-            },
-            {
-                term: "Current Assets",
-                category: "Accounting",
-                definition: "Assets expected to be converted to cash or used within one year.",
-                detailed: "Includes cash, accounts receivable, inventory, prepaid expenses. Important for measuring short-term liquidity.",
-                example: "Cash $20K, Accounts Receivable $30K, Inventory $40K, Prepaid Insurance $5K = Current Assets $95K.",
-                keywords: "current assets liquid short term cash inventory receivable"
-            },
-            {
-                term: "Current Liabilities",
-                category: "Accounting",
-                definition: "Obligations due within one year, including accounts payable and short-term debt.",
-                detailed: "Used to calculate current ratio (current assets ÷ current liabilities) and working capital.",
-                example: "Accounts Payable $15K, Short-term Loan $20K, Accrued Expenses $10K = Current Liabilities $45K.",
-                keywords: "current liabilities short term debt payable obligations"
+                definition: "Entry that increases liabilities/equity/revenue or decreases assets/expenses",
+                detailed: "Right side of accounts. Part of double-entry bookkeeping where debits = credits.",
+                example: "Receive $5K from customer: Credit AR $5K (decrease asset), Debit Cash $5K",
+                keywords: "credit entry right increase decrease"
             },
             {
                 term: "Debit",
                 category: "Accounting",
-                definition: "Left side of an account in double-entry bookkeeping. Increases assets and expenses.",
-                detailed: "Debits decrease liabilities, equity, and revenue. Every transaction has equal debits and credits.",
-                example: "Buy equipment for $5,000 cash: Debit Equipment $5,000, Credit Cash $5,000.",
-                keywords: "debit entry left side increase asset expense"
+                definition: "Entry that increases assets/expenses or decreases liabilities/equity/revenue",
+                detailed: "Left side of accounts. In double-entry, total debits must equal total credits.",
+                example: "Buy equipment $10K cash: Debit Equipment $10K, Credit Cash $10K",
+                keywords: "debit entry left increase decrease"
             },
             {
                 term: "Depreciation",
                 category: "Accounting",
-                definition: "Systematic allocation of an asset's cost over its useful life.",
-                detailed: "Common methods: Straight-line (equal each year), Declining balance (more early), Units of production (based on usage).",
-                example: "Equipment costs $50,000, useful life 10 years, salvage value $5,000. Straight-line: ($50K-$5K)÷10 = $4,500/year.",
-                keywords: "depreciation expense asset allocation useful life straight line"
+                definition: "Allocation of tangible asset cost over useful life",
+                detailed: "Methods: Straight-line (equal annual), declining balance (accelerated), units of production.",
+                example: "$100K equipment, 10-year life = $10K annual depreciation",
+                keywords: "depreciation asset allocation expense"
             },
             {
                 term: "Double-Entry Bookkeeping",
                 category: "Accounting",
-                definition: "Accounting system where every transaction affects at least two accounts with equal debits and credits.",
-                detailed: "Ensures the accounting equation stays balanced. Debits must equal credits. Provides complete transaction record.",
-                example: "Borrow $10,000: Debit Cash $10,000 (asset increases), Credit Loan Payable $10,000 (liability increases).",
-                keywords: "double entry bookkeeping debit credit system balance"
+                definition: "System where every transaction affects at least two accounts",
+                detailed: "Debits must equal credits. Maintains accounting equation balance. Foundation of modern accounting.",
+                example: "Buy $1K inventory cash: Debit Inventory $1K, Credit Cash $1K",
+                keywords: "double entry bookkeeping debit credit"
             },
             {
                 term: "Equity",
                 category: "Accounting",
-                definition: "Owner's stake in the business, calculated as Assets - Liabilities.",
-                detailed: "Also called Owner's Equity, Net Worth, or Shareholders' Equity. Includes capital invested plus retained earnings.",
-                example: "Assets $500K - Liabilities $300K = Equity $200K. This represents the owner's claim on business assets.",
-                keywords: "equity ownership capital net worth shareholders stake"
+                definition: "Owner's residual interest in assets after deducting liabilities",
+                detailed: "Includes capital contributions and retained earnings. Equity = Assets - Liabilities.",
+                example: "Assets $500K, Liabilities $300K = Equity $200K",
+                keywords: "equity capital ownership stake"
             },
             {
-                term: "Expense",
+                term: "Expenses",
                 category: "Accounting",
-                definition: "Cost incurred in generating revenue during normal business operations.",
-                detailed: "Appears on income statement. Reduces net income. Includes rent, salaries, utilities, supplies, depreciation.",
-                example: "Monthly expenses: Rent $3,000, Salaries $10,000, Utilities $500, Supplies $1,000 = Total $14,500.",
-                keywords: "expense cost operating overhead business operations"
-            },
-            {
-                term: "Financial Statements",
-                category: "Accounting",
-                definition: "Formal records of business financial activities: Balance Sheet, Income Statement, Cash Flow Statement.",
-                detailed: "Must be prepared according to accounting standards (GAAP or IFRS). Used by investors, lenders, management for decisions.",
-                example: "Quarter-end financial statements show: Balance Sheet (position), Income Statement (profitability), Cash Flow (liquidity).",
-                keywords: "financial statements reports balance income cash flow"
+                definition: "Costs incurred to generate revenue",
+                detailed: "Operating expenses (rent, salaries) and non-operating expenses (interest). Reduce net income.",
+                example: "Monthly expenses: Rent $5K, Salaries $20K, Utilities $2K = Total $27K",
+                keywords: "expenses costs operating overhead"
             },
             {
                 term: "Fixed Assets",
                 category: "Accounting",
-                definition: "Long-term tangible assets used in operations, not easily converted to cash.",
-                detailed: "Also called Property, Plant & Equipment (PP&E). Includes land, buildings, machinery, vehicles. Subject to depreciation except land.",
-                example: "Land $200K, Building $500K, Equipment $300K, Vehicles $100K = Fixed Assets $1.1M (net of depreciation).",
-                keywords: "fixed assets ppe property plant equipment long term tangible"
+                definition: "Long-term tangible property used in operations",
+                detailed: "Land, buildings, equipment, vehicles. Not intended for sale. Depreciated (except land).",
+                example: "Building $500K, Equipment $100K, Vehicles $50K = Fixed Assets $650K",
+                keywords: "fixed assets property plant equipment"
             },
             {
-                term: "
-</html>
+                term: "General Ledger",
+                category: "Accounting",
+                definition: "Master accounting record containing all accounts",
+                detailed: "Transactions posted from journals. Shows account balances. Basis for financial statements.",
+                example: "GL includes: Cash account, AR account, AP account, Revenue account, etc.",
+                keywords: "general ledger accounts books records"
+            },
+            {
+                term: "Goodwill",
+                category: "Accounting",
+                definition: "Intangible asset from acquiring business above fair value",
+                detailed: "Represents brand value, customer relationships, reputation. Not amortized but tested annually for impairment.",
+                example: "Buy company for $10M, net assets worth $7M. Goodwill = $3M",
+                keywords: "goodwill intangible acquisition premium"
+            },
+            {
+                term: "Gross Profit",
+                category: "Accounting",
+                definition: "Revenue minus Cost of Goods Sold",
+                detailed: "Indicates profitability before operating expenses. Gross Margin = (Gross Profit / Revenue) × 100%",
+                example: "Revenue $100K, COGS $60K = Gross Profit $40K (40% margin)",
+                keywords: "gross profit margin revenue cogs"
+            },
+            {
+                term: "Income Statement",
+                category: "Accounting",
+                definition: "Report showing revenue, expenses, and profit over period",
+                detailed: "Also called P&L (Profit & Loss). Format: Revenue - COGS = Gross Profit - Expenses = Net Income.",
+                example: "Revenue $500K - COGS $300K - Expenses $150K = Net Income $50K",
+                keywords: "income statement profit loss p&l"
+            },
+            {
+                term: "Inventory",
+                category: "Accounting",
+                definition: "Goods available for sale",
+                detailed: "Current asset valued using FIFO, LIFO, or weighted average. Affects COGS and gross profit.",
+                example: "Beginning $20K + Purchases $80K - Ending $30K = COGS $70K",
+                keywords: "inventory stock goods merchandise"
+            },
+            {
+                term: "Journal Entry",
+                category: "Accounting",
+                definition: "Recording of business transaction with debits and credits",
+                detailed: "First step in accounting cycle. Includes date, accounts, amounts, description.",
+                example: "Cash sale: Dr Cash $1,000, Cr Sales Revenue $1,000",
+                keywords: "journal entry transaction recording"
+            },
+            {
+                term: "Liabilities",
+                category: "Accounting",
+                definition: "Obligations owed to others",
+                detailed: "Current (due within year) and long-term. Part of accounting equation: Assets = Liabilities + Equity.",
+                example: "Loans $150K, Accounts Payable $50K = Total Liabilities $200K",
+                keywords: "liabilities obligations debt owed"
+            },
+            {
+                term: "Net Income",
+                category: "Accounting",
+                definition: "Total revenue minus total expenses (bottom line)",
+                detailed: "Indicates overall profitability. Added to retained earnings. Can be distributed as dividends.",
+                example: "Revenue $500K - All Expenses $450K = Net Income $50K",
+                keywords: "net income profit earnings bottom line"
+            },
+            {
+                term: "Retained Earnings",
+                category: "Accounting",
+                definition: "Cumulative profits kept in business (not distributed as dividends)",
+                detailed: "Equity account. Increases with net income, decreases with losses and dividends.",
+                example: "Beginning $100K + Net Income $50K - Dividends $20K = Ending $130K",
+                keywords: "retained earnings accumulated profits"
+            },
+            {
+                term: "Revenue",
+                category: "Accounting",
+                definition: "Income from normal business operations (sales)",
+                detailed: "Recognized when earned (accrual) or received (cash basis). Top line of income statement.",
+                example: "Sell 100 products at $500 each = Revenue $50,000",
+                keywords: "revenue sales income turnover"
+            },
+            {
+                term: "Trial Balance",
+                category: "Accounting",
+                definition: "List of all accounts with debit/credit balances",
+                detailed: "Verifies total debits equal total credits. Prepared before financial statements.",
+                example: "Total Debits $500K = Total Credits $500K (balanced)",
+                keywords: "trial balance verification accounts"
+            },
+            {
+                term: "Working Capital",
+                category: "Accounting",
+                definition: "Current Assets minus Current Liabilities",
+                detailed: "Measures short-term financial health and liquidity. Positive = can cover obligations.",
+                example: "Current Assets $230K - Current Liabilities $125K = Working Capital $105K",
+                keywords: "working capital liquidity current"
+            },
+
+            // SHARK TANK TERMS
+            {
+                term: "Equity Deal",
+                category: "Shark Tank",
+                definition: "Investment in exchange for ownership percentage",
+                detailed: "Most common Shark Tank deal. Shark gets equity (ownership stake) for capital investment.",
+                example: "$100K for 20% equity values company at $500K",
+                keywords: "equity ownership stake investment percentage"
+            },
+            {
+                term: "Valuation",
+                category: "Shark Tank",
+                definition: "Total estimated worth of company",
+                detailed: "Calculated: Investment ÷ Equity % = Valuation. Sharks often challenge entrepreneurs' valuations.",
+                example: "Asking $200K for 10% implies $2M valuation",
+                keywords: "valuation worth value company"
+            },
+            {
+                term: "Royalty Deal",
+                category: "Shark Tank",
+                definition: "Payment per unit sold until amount is recouped",
+                detailed: "Kevin O'Leary's favorite. Investor gets $ per unit until paid back, sometimes with equity.",
+                example: "$75K for $3/unit until $150K back, plus 5% equity",
+                keywords: "royalty deal payment per unit kevin"
+            },
+            {
+                term: "Revenue",
+                category: "Shark Tank",
+                definition: "Total sales/income before expenses",
+                detailed: "Sharks always ask: 'What are your sales?' Different from profit. Top line number.",
+                example: "Sold 10,000 units at $50 each = $500K revenue",
+                keywords: "revenue sales income top line"
+            },
+            {
+                term: "Profit Margin",
+                category: "Shark Tank",
+                definition: "Percentage of revenue left after costs",
+                detailed: "Gross margin = (Revenue - COGS) ÷ Revenue. Sharks want 50%+ margins.",
+                example: "Sell for $100, costs $40 to make = 60% gross margin",
+                keywords: "profit margin gross percentage"
+            },
+            {
+                term: "Burn Rate",
+                category: "Shark Tank",
+                definition: "Cash spent per month (for unprofitable startups)",
+                detailed: "Critical metric. Determines runway (months until cash runs out).",
+                example: "Expenses $50K/month, revenue $30K = $20K/month burn rate",
+                keywords: "burn rate cash spent monthly"
+            },
+            {
+                term: "EBITDA",
+                category: "Shark Tank",
+                definition: "Earnings Before Interest, Taxes, Depreciation, Amortization",
+                detailed: "Measures operating profitability. Used for valuation multiples.",
+                example: "Net Income + Interest + Taxes + D&A = EBITDA",
+                keywords: "ebitda earnings operating profitability"
+            },
+            {
+                term: "CAC",
+                category: "Shark Tank",
+                definition: "Customer Acquisition Cost",
+                detailed: "Cost to acquire one customer. Marketing spend ÷ new customers.",
+                example: "Spend $10K marketing, get 500 customers = $20 CAC",
+                keywords: "cac customer acquisition cost marketing"
+            },
+            {
+                term: "LTV",
+                category: "Shark Tank",
+                definition: "Lifetime Value of customer",
+                detailed: "Total revenue from customer over relationship. Should be 3x+ CAC.",
+                example: "Customer buys $100/month for 24 months = $2,400 LTV",
+                keywords: "ltv lifetime value customer revenue"
+            },
+            {
+                term: "Licensing Deal",
+                category: "Shark Tank",
+                definition: "Shark licenses product/brand for royalty payments",
+                detailed: "Entrepreneur keeps ownership, Shark pays for rights to manufacture/sell.",
+                example: "Shark pays 8% royalty on all sales to license product",
+                keywords: "licensing deal royalty rights"
+            },
+
+            // FINANCIAL ANALYSIS TERMS
