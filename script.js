@@ -32,3 +32,6 @@ function scrollToTopic(topicTitle) {
         searchResults.classList.add('active');
     }
 });
+<button class="google-search-button" onclick="searchGoogle('${searchTerm}')">
+    🔍 Ask AI: Search for "${searchTerm}"
+</button>
