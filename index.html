@@ -2,9 +2,31 @@ import React, { useState, useMemo } from 'react';
 import { Search, BookOpen, TrendingUp, DollarSign, FileText, Building, Users, Calculator, BarChart3, Menu, X, Star, Download } from 'lucide-react';
 
 const AccountingTerms = () => {
-  // ... your entire component code ...
-};
-export default AccountingTerms;   
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedTerm, setSelectedTerm] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+
+  const toggleFavorite = (termName) => {
+    setFavorites(prev => 
+      prev.includes(termName) 
+        ? prev.filter(f => f !== termName)
+        : [...prev, termName]
+    );
+  };
+
+  const exportFavorites = () => {
+    const favTerms = allTerms.filter(t => favorites.includes(t.term));
+    const text = favTerms.map(t => 
+      `${t.term} (${t.category})\n${t.definition}\nExample: ${t.example}\n\n`
+    ).join('');
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'accounting-terms-favorites.txt';
  { term: "Demo Day", category: "Investment", definition: "Event where startups pitch investors.", example: "Accelerator graduates present to 200 investors." },
     { term: "Pitch Competition", category: "Investment", definition: "Contest for best startup pitch.", example: "Winner gets $50K investment prize." },
     { term: "Business Plan Competition", category: "Investment", definition: "Contest judging business plans.", example: "MBA students compete for startup funding." },
