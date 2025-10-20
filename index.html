@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Accounting & Finance Dictionary (339 Terms)</title>
+    <title>Complete Accounting & Finance Dictionary (329 Terms)</title>
     <style>
         /* CSS for a modern, clean look */
         :root {
@@ -196,7 +196,7 @@
     <div class="main-content">
         <header>
             <h1>Accounting & Finance Dictionary</h1>
-            <p>339 essential terms for students, founders, and professionals.</p>
+            <p>329 essential terms for students, founders, and professionals.</p>
             <div class="search-container">
                 <input type="text" id="search-input" class="search-input" placeholder="Search for 'Balance Sheet', 'NPV', or 'Treasury Stock'...">
             </div>
@@ -208,7 +208,7 @@
 </div>
 
 <script>
-    // 1. DATA STORAGE (The original 259 terms + 35 new terms + 45 new terms = 339 total)
+    // 1. DATA STORAGE (The original 259 terms + 35 new terms + 30 new terms = 329 total)
     const allTerms = [
         // Financial Statements (15 terms)
         { term: "Balance Sheet", category: "Financial Statements", definition: "Financial statement reporting assets, liabilities, and equity.", example: "Company with $500K assets, $200K liabilities has $300K equity." },
@@ -538,9 +538,9 @@
         { term: "APY (Annual Percentage Yield)", category: "Personal Finance & Budgeting", definition: "The effective annual rate of return, taking into account compounding interest.", example: "A bank account advertises 4.5% APY." },
         { term: "Inflation", category: "Personal Finance & Budgeting", definition: "The rate at which the general level of prices for goods and services is rising.", example: "3% annual inflation means your purchasing power decreases by 3%." },
         { term: "Dividend", category: "Personal Finance & Budgeting", definition: "A payment made by a corporation to its shareholders.", example: "A stock pays a $1.50 quarterly dividend per share." },
-        // --- EXPANSION 1 END ---
+        // --- EXPANSION 1 END (Total terms here is 284, matching your observation) ---
 
-        // --- EXPANSION 2 START ---
+        // --- EXPANSION 2 START (These are the missing 45 terms) ---
         // Financial Management (15 terms)
         { term: "Capital Budgeting", category: "Financial Management", definition: "Process of evaluating and selecting long-term investments.", example: "Deciding whether to buy a new machine or outsource production." },
         { term: "Net Present Value (NPV)", category: "Financial Management", definition: "The difference between the present value of cash inflows and outflows.", example: "A project with a positive NPV is generally accepted." },
@@ -657,7 +657,7 @@
         }).join('');
     }
 
-    // Attach event listeners
+    // 5. ATTACH EVENT LISTENERS AND INITIAL PAGE LOAD
     searchInput.addEventListener('input', renderTerms);
     
     categoryList.addEventListener('click', (event) => {
@@ -669,7 +669,7 @@
         }
     });
 
-    // 5. INITIAL PAGE LOAD
+    // Initial page load
     renderCategories();
     renderTerms();
 </script>
