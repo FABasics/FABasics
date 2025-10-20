@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Accounting & Finance Dictionary (259 Terms)</title>
+    <title>Complete Accounting & Finance Dictionary (294 Terms)</title>
     <style>
         /* CSS for a modern, clean look */
         :root {
@@ -196,9 +196,9 @@
     <div class="main-content">
         <header>
             <h1>Accounting & Finance Dictionary</h1>
-            <p>259 essential terms for students, founders, and professionals.</p>
+            <p>294 essential terms for students, founders, and professionals.</p>
             <div class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Search for 'Balance Sheet', 'EBITDA', or 'GST'...">
+                <input type="text" id="search-input" class="search-input" placeholder="Search for 'Balance Sheet', 'DCF', or '401(k)'...">
             </div>
         </header>
 
@@ -208,7 +208,7 @@
 </div>
 
 <script>
-    // 1. DATA STORAGE (The extracted terms from your TSX file)
+    // 1. DATA STORAGE (The original 259 terms + 35 new terms = 294 total)
     const allTerms = [
         // Financial Statements (15 terms)
         { term: "Balance Sheet", category: "Financial Statements", definition: "Financial statement reporting assets, liabilities, and equity.", example: "Company with $500K assets, $200K liabilities has $300K equity." },
@@ -498,6 +498,47 @@
         { term: "Private Company", category: "Business Entities", definition: "Privately held, not publicly traded.", example: "SpaceX not publicly traded, privately owned." },
         { term: "Nonprofit", category: "Business Entities", definition: "Organization operating for mission not profit.", example: "Red Cross, charities, foundations." },
         { term: "Holding Company", category: "Business Entities", definition: "Owns controlling stakes in other companies.", example: "Berkshire Hathaway owns multiple businesses." },
+        
+        // --- NEW CATEGORIES START HERE ---
+
+        // Financial Modeling & Valuation (20 terms)
+        { term: "Discount Rate", category: "Financial Modeling & Valuation", definition: "Rate used to find the present value of future cash flows.", example: "Use a 10% discount rate to evaluate a 5-year project." },
+        { term: "DCF (Discounted Cash Flow)", category: "Financial Modeling & Valuation", definition: "Valuation method using the present value of projected free cash flows.", example: "DCF model shows a stock's intrinsic value is $80." },
+        { term: "WACC (Weighted Average Cost of Capital)", category: "Financial Modeling & Valuation", definition: "Average rate a company expects to pay to finance its assets.", example: "WACC of 8% means the firm must earn at least 8% return." },
+        { term: "Terminal Value (TV)", category: "Financial Modeling & Valuation", definition: "The value of a company's projected cash flows beyond the forecast period.", example: "TV is calculated using the Gordon Growth Model after year 5." },
+        { term: "Free Cash Flow (FCF)", category: "Financial Modeling & Valuation", definition: "Cash a company generates after accounting for cash outflows to support operations and maintain assets.", example: "Operating cash flow minus capital expenditures." },
+        { term: "Sensitivity Analysis", category: "Financial Modeling & Valuation", definition: "Testing how changes in key variables (like growth rate) affect the final valuation.", example: "Running the DCF with 2% and 4% growth rates to see the stock price range." },
+        { term: "Comps (Comparable Analysis)", category: "Financial Modeling & Valuation", definition: "Valuation method using the trading multiples of similar public companies.", example: "Valuing a SaaS company at 10x its revenue multiple, similar to its comps." },
+        { term: "Precedent Transactions", category: "Financial Modeling & Valuation", definition: "Valuation method using the multiples paid in past M&A deals for similar companies.", example: "Using the 12x EBITDA multiple paid in a recent sector acquisition." },
+        { term: "Enterprise Value (EV)", category: "Financial Modeling & Valuation", definition: "Total value of a company, including equity and debt, minus cash.", example: "Market Cap + Debt - Cash." },
+        { term: "Equity Value", category: "Financial Modeling & Valuation", definition: "Market value of a company's equity (Market Cap).", example: "Share Price $\\times$ Shares Outstanding." },
+        { term: "LBO (Leveraged Buyout)", category: "Financial Modeling & Valuation", definition: "Acquisition of a company using a significant amount of borrowed money.", example: "A Private Equity firm uses 70% debt to purchase a target company." },
+        { term: "Modeling Assumptions", category: "Financial Modeling & Valuation", definition: "Key inputs and estimates used in a financial model.", example: "Assuming 5% annual revenue growth and a 20% EBITDA margin." },
+        { term: "Pivot Table", category: "Financial Modeling & Valuation", definition: "A spreadsheet tool used to summarize, analyze, explore, and present data.", example: "Using a Pivot Table to summarize monthly sales by region and product." },
+        { term: "Circular Reference", category: "Financial Modeling & Valuation", definition: "An error where a formula refers to its own cell, either directly or indirectly.", example: "Debt interest expense calculation relies on the debt balance, which relies on the debt interest expense." },
+        { term: "Hockey Stick Growth", category: "Financial Modeling & Valuation", definition: "Financial projections showing modest growth initially, followed by extremely rapid growth.", example: "Startup projection showing 20% growth in year 1, but 200% growth in year 3." },
+        { term: "Driver", category: "Financial Modeling & Valuation", definition: "A key operational or financial metric that dictates the forecast of other line items.", example: "Number of subscribers is the driver for subscription revenue." },
+        { term: "Plug", category: "Financial Modeling & Valuation", definition: "A cell in a model that is calculated as a residual or balancing amount.", example: "Cash is often the plug in the cash flow statement to balance the balance sheet." },
+        { term: "Scenario Analysis", category: "Financial Modeling & Valuation", definition: "Developing different financial projections based on various macro/economic outcomes (e.g., Base, Best, Worst).", example: "Modeling three scenarios: high inflation, stable growth, and recession." },
+        { term: "Cost of Equity", category: "Financial Modeling & Valuation", definition: "The return required by equity investors (shareholders).", example: "Often calculated using the Capital Asset Pricing Model (CAPM)." },
+        { term: "IRR (Internal Rate of Return)", category: "Financial Modeling & Valuation", definition: "The discount rate that makes the net present value (NPV) of all cash flows from a project equal to zero.", example: "An IRR of 15% on a project is considered favorable if the required return is 10%." },
+
+        // Personal Finance & Budgeting (15 terms)
+        { term: "Budget", category: "Personal Finance & Budgeting", definition: "A detailed plan for spending and saving money over a specific period.", example: "A zero-based budget requires assigning every dollar of income to a category." },
+        { term: "Net Worth", category: "Personal Finance & Budgeting", definition: "Total assets minus total liabilities.", example: "$100K in assets minus $50K in debt equals $50K net worth." },
+        { term: "Emergency Fund", category: "Personal Finance & Budgeting", definition: "Liquid savings set aside to cover unexpected expenses.", example: "Saving 6 months' worth of living expenses in a high-yield savings account." },
+        { term: "FICO Score", category: "Personal Finance & Budgeting", definition: "A consumer credit score ranging from 300 to 850, used by lenders.", example: "A FICO score of 800 helps secure a low-interest mortgage." },
+        { term: "401(k)", category: "Personal Finance & Budgeting", definition: "An employer-sponsored retirement savings plan in the US.", example: "Contributing up to the employer match is free money for retirement." },
+        { term: "Roth IRA", category: "Personal Finance & Budgeting", definition: "An individual retirement account funded with after-tax dollars, where withdrawals in retirement are tax-free.", example: "Saving $6,500 annually in a Roth IRA." },
+        { term: "Tax-Advantaged Account", category: "Personal Finance & Budgeting", definition: "Any savings or investment vehicle that provides tax benefits (deferral or exemption).", example: "401(k), IRA, HSA." },
+        { term: "Rule of 72", category: "Personal Finance & Budgeting", definition: "A quick way to estimate how long it takes for money to double.", example: "Money invested at 8% will double in $72 \\div 8 = 9$ years." },
+        { term: "Time Value of Money (TVM)", category: "Personal Finance & Budgeting", definition: "The concept that money available now is worth more than the same amount in the future.", example: "$1,000 today can earn interest, making it worth more than $1,000 next year." },
+        { term: "Sinking Fund", category: "Personal Finance & Budgeting", definition: "A savings method where you save small amounts regularly for a large, future expense.", example: "Saving $200 monthly for a $2,400 vacation next year." },
+        { term: "Debt-to-Income Ratio (DTI)", category: "Personal Finance & Budgeting", definition: "The percentage of monthly gross income that goes toward paying debt.", example: "$1,000 debt payments on $5,000 income equals 20% DTI." },
+        { term: "APR (Annual Percentage Rate)", category: "Personal Finance & Budgeting", definition: "The cost of credit expressed as a yearly rate.", example: "A credit card with 22% APR charges high interest." },
+        { term: "APY (Annual Percentage Yield)", category: "Personal Finance & Budgeting", definition: "The effective annual rate of return, taking into account compounding interest.", example: "A bank account advertises 4.5% APY." },
+        { term: "Inflation", category: "Personal Finance & Budgeting", definition: "The rate at which the general level of prices for goods and services is rising.", example: "3% annual inflation means your purchasing power decreases by 3%." },
+        { term: "Dividend", category: "Personal Finance & Budgeting", definition: "A payment made by a corporation to its shareholders.", example: "A stock pays a $1.50 quarterly dividend per share." },
     ];
 
     // 2. STATE AND INITIALIZATION
