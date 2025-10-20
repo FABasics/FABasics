@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Accounting & Finance Dictionary (294 Terms)</title>
+    <title>Complete Accounting & Finance Dictionary (339 Terms)</title>
     <style>
         /* CSS for a modern, clean look */
         :root {
@@ -196,9 +196,9 @@
     <div class="main-content">
         <header>
             <h1>Accounting & Finance Dictionary</h1>
-            <p>294 essential terms for students, founders, and professionals.</p>
+            <p>339 essential terms for students, founders, and professionals.</p>
             <div class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Search for 'Balance Sheet', 'DCF', or '401(k)'...">
+                <input type="text" id="search-input" class="search-input" placeholder="Search for 'Balance Sheet', 'NPV', or 'Treasury Stock'...">
             </div>
         </header>
 
@@ -208,7 +208,7 @@
 </div>
 
 <script>
-    // 1. DATA STORAGE (The original 259 terms + 35 new terms = 294 total)
+    // 1. DATA STORAGE (The original 259 terms + 35 new terms + 45 new terms = 339 total)
     const allTerms = [
         // Financial Statements (15 terms)
         { term: "Balance Sheet", category: "Financial Statements", definition: "Financial statement reporting assets, liabilities, and equity.", example: "Company with $500K assets, $200K liabilities has $300K equity." },
@@ -499,8 +499,7 @@
         { term: "Nonprofit", category: "Business Entities", definition: "Organization operating for mission not profit.", example: "Red Cross, charities, foundations." },
         { term: "Holding Company", category: "Business Entities", definition: "Owns controlling stakes in other companies.", example: "Berkshire Hathaway owns multiple businesses." },
         
-        // --- NEW CATEGORIES START HERE ---
-
+        // --- EXPANSION 1 START ---
         // Financial Modeling & Valuation (20 terms)
         { term: "Discount Rate", category: "Financial Modeling & Valuation", definition: "Rate used to find the present value of future cash flows.", example: "Use a 10% discount rate to evaluate a 5-year project." },
         { term: "DCF (Discounted Cash Flow)", category: "Financial Modeling & Valuation", definition: "Valuation method using the present value of projected free cash flows.", example: "DCF model shows a stock's intrinsic value is $80." },
@@ -539,6 +538,60 @@
         { term: "APY (Annual Percentage Yield)", category: "Personal Finance & Budgeting", definition: "The effective annual rate of return, taking into account compounding interest.", example: "A bank account advertises 4.5% APY." },
         { term: "Inflation", category: "Personal Finance & Budgeting", definition: "The rate at which the general level of prices for goods and services is rising.", example: "3% annual inflation means your purchasing power decreases by 3%." },
         { term: "Dividend", category: "Personal Finance & Budgeting", definition: "A payment made by a corporation to its shareholders.", example: "A stock pays a $1.50 quarterly dividend per share." },
+        // --- EXPANSION 1 END ---
+
+        // --- EXPANSION 2 START ---
+        // Financial Management (15 terms)
+        { term: "Capital Budgeting", category: "Financial Management", definition: "Process of evaluating and selecting long-term investments.", example: "Deciding whether to buy a new machine or outsource production." },
+        { term: "Net Present Value (NPV)", category: "Financial Management", definition: "The difference between the present value of cash inflows and outflows.", example: "A project with a positive NPV is generally accepted." },
+        { term: "Payback Period", category: "Financial Management", definition: "Time required to recover the initial investment.", example: "Investment of $100K with $25K annual return has a 4-year payback period." },
+        { term: "Working Capital Management", category: "Financial Management", definition: "Managing current assets and liabilities to ensure liquidity.", example: "Optimizing inventory levels and collection cycles." },
+        { term: "Cost of Capital", category: "Financial Management", definition: "The minimum rate of return a company must earn on its existing asset base.", example: "Used as the hurdle rate for capital budgeting decisions." },
+        { term: "Capital Structure", category: "Financial Management", definition: "The mix of debt and equity used to finance operations.", example: "Target capital structure is 60% equity and 40% debt." },
+        { term: "Financial Leverage", category: "Financial Management", definition: "Use of borrowed funds (debt) to increase potential returns.", example: "High leverage amplifies both profits and losses." },
+        { term: "Risk-Return Tradeoff", category: "Financial Management", definition: "The principle that higher returns require taking higher risks.", example: "Junk bonds offer higher interest rates due to higher default risk." },
+        { term: "Dividend Policy", category: "Financial Management", definition: "Guidelines for paying out earnings to shareholders.", example: "Company adopts a stable dividend policy, paying $1.00 per share annually." },
+        { term: "Economic Value Added (EVA)", category: "Financial Management", definition: "Measures true economic profit; NOPAT minus (WACC $\\times$ Capital).", example: "If NOPAT is $1M and cost of capital is $800K, EVA is $200K." },
+        { term: "Trade Credit", category: "Financial Management", definition: "Short-term financing provided by suppliers.", example: "Buying inventory on 'net 30' terms." },
+        { term: "Factoring", category: "Financial Management", definition: "Selling accounts receivable to a third party for immediate cash.", example: "Company sells its $50K receivables for $45K cash now." },
+        { term: "Agency Cost", category: "Financial Management", definition: "Conflict of interest between a company's management (agents) and its shareholders (principals).", example: "CEO using corporate jets for personal travel." },
+        { term: "P/B Ratio (Price-to-Book)", category: "Financial Management", definition: "Market price per share divided by book value per share.", example: "A P/B ratio of 2 means the market values the company at twice its accounting book value." },
+        { term: "Inventory Management", category: "Financial Management", definition: "Overseeing and controlling the ordering, storage, and use of materials.", example: "Using Just-In-Time (JIT) to reduce storage costs." },
+
+        // Corporate Tax (15 terms)
+        { term: "Taxable Income", category: "Corporate Tax", definition: "A corporation's gross income less allowable deductions, subject to tax rates.", example: "Calculated by starting with pre-tax book income and making M-1 adjustments." },
+        { term: "Permanent Difference", category: "Corporate Tax", definition: "Items included in book income but never in taxable income (or vice versa).", example: "Tax-exempt municipal bond interest is a permanent difference." },
+        { term: "Temporary Difference", category: "Corporate Tax", definition: "Difference between book and tax basis that will reverse over time.", example: "Using different depreciation methods for book and tax creates a temporary difference." },
+        { term: "Tax Loss Carryforward", category: "Corporate Tax", definition: "A net operating loss (NOL) from a previous year used to offset future taxable income.", example: "$1M NOL used to zero out $1M of next year's profit." },
+        { term: "Deduction", category: "Corporate Tax", definition: "An expense that can be subtracted from gross income to reduce tax liability.", example: "Business meals are often only 50% deductible." },
+        { term: "Tax Credit", category: "Corporate Tax", definition: "A direct reduction of the tax liability, dollar-for-dollar.", example: "R&D tax credit lowers tax bill more effectively than a deduction." },
+        { term: "Amortization of Goodwill", category: "Corporate Tax", definition: "The tax code may allow amortization of purchased goodwill over 15 years.", example: "$1.5M of goodwill amortized at $100K per year for tax purposes." },
+        { term: "Transfer Pricing", category: "Corporate Tax", definition: "Setting prices for goods/services exchanged between related corporate entities in different tax jurisdictions.", example: "Selling raw materials from a low-tax subsidiary to a high-tax subsidiary." },
+        { term: "E&P (Earnings and Profits)", category: "Corporate Tax", definition: "A tax concept similar to retained earnings, defining the limit for taxable dividends.", example: "Dividends are taxed as ordinary income only to the extent of E&P." },
+        { term: "Effective Tax Rate", category: "Corporate Tax", definition: "Total tax expense (including federal, state, and international) divided by pre-tax book income.", example: "Tax expense $1M / Pre-tax income $5M = 20%." },
+        { term: "Apportionment", category: "Corporate Tax", definition: "Method used by states to divide a multistate corporation's income for state tax purposes.", example: "Usually based on sales, payroll, and property factors." },
+        { term: "Tax Nexus", category: "Corporate Tax", definition: "The degree of business activity required within a state to subject a corporation to its state income tax.", example: "Having a physical warehouse in a state creates tax nexus." },
+        { term: "Filing Status", category: "Corporate Tax", definition: "How a taxpayer reports their income and deductions (e.g., Consolidated, Separate, or Worldwide).", example: "A parent company and its 80%-owned subsidiaries can file a consolidated return." },
+        { term: "IRC", category: "Corporate Tax", definition: "Internal Revenue Code, the primary source of federal tax law in the U.S.", example: "Section 179 permits immediate expensing of certain depreciable assets." },
+        { term: "Capital Expenditures (CapEx)", category: "Corporate Tax", definition: "Funds used by a company to acquire or upgrade physical assets.", example: "Generally capitalized and depreciated, not immediately deductible." },
+
+        // Corporate Accounting (15 terms)
+        { term: "Treasury Stock", category: "Corporate Accounting", definition: "Shares of stock repurchased by the issuing company.", example: "Company buys back 10,000 shares to reduce outstanding shares." },
+        { term: "Stock Split", category: "Corporate Accounting", definition: "Increasing the number of shares and decreasing the price proportionally.", example: "A 2-for-1 split doubles shares, halves price per share." },
+        { term: "Par Value", category: "Corporate Accounting", definition: "The minimum legal value per share, often nominal.", example: "Common stock with $0.01 par value." },
+        { term: "Additional Paid-in Capital (APIC)", category: "Corporate Accounting", definition: "Amount received from stock sales exceeding the par value.", example: "Sold $0.01 par value stock for $10, APIC is $9.99 per share." },
+        { term: "Diluted EPS", category: "Corporate Accounting", definition: "Earnings per share calculated as if all convertible securities were exercised.", example: "Includes the impact of stock options and convertible bonds in the share count." },
+        { term: "Basic EPS", category: "Corporate Accounting", definition: "Net income divided by the weighted average number of common shares outstanding.", example: "The primary EPS reported on the income statement." },
+        { term: "Preferred Stock", category: "Corporate Accounting", definition: "A class of stock with priority over common stock for dividends and liquidation.", example: "Pays a fixed 5% dividend regardless of company earnings." },
+        { term: "Book Value Per Share", category: "Corporate Accounting", definition: "Shareholders' equity divided by the number of common shares outstanding.", example: "$1M equity / 100K shares equals $10 book value per share." },
+        { term: "Stock Options", category: "Corporate Accounting", definition: "Gives the holder the right to buy stock at a fixed price (strike price).", example: "Executive granted options to buy 10,000 shares at $50." },
+        { term: "Restricted Stock Units (RSUs)", category: "Corporate Accounting", definition: "Stock granted to employees, typically vesting over a period of years.", example: "RSU vests after 4 years, giving the employee ownership of the shares." },
+        { term: "Consolidation Accounting", category: "Corporate Accounting", definition: "The process of combining the financial statements of a parent company and its subsidiaries.", example: "Required when the parent holds more than 50% of the subsidiary's voting stock." },
+        { term: "Equity Method", category: "Corporate Accounting", definition: "Accounting for investments where the investor has significant influence (20%-50% ownership).", example: "Investor records its share of the associate's net income." },
+        { term: "Derivative", category: "Corporate Accounting", definition: "A financial instrument whose value is derived from an underlying asset (e.g., stock, commodity).", example: "Futures and options contracts are derivatives used for hedging." },
+        { term: "Off-Balance Sheet Financing", category: "Corporate Accounting", definition: "Obligations not reported as liabilities on the balance sheet.", example: "Certain operating leases or joint venture debt (before IFRS 16/ASC 842)." },
+        { term: "Intercompany Transaction", category: "Corporate Accounting", definition: "Transactions between a parent company and its subsidiary.", example: "Parent company sells inventory to a subsidiary; must be eliminated during consolidation." },
+        // --- EXPANSION 2 END ---
     ];
 
     // 2. STATE AND INITIALIZATION
