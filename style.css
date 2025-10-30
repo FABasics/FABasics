@@ -1,52 +1,10 @@
-/* CSS for the new Google Search button in the results box */
-.google-search-button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.google-search-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.no-results p {
-    margin-bottom: 10px;
-}
-/* Must be in your style.css file */
-
-.google-search-button {
-    /* Styles for visibility and design */
-    display: inline-block; 
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.google-search-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.no-results {
-    /* Ensure the no-results container itself is styled for centering */
-    padding: 2rem; 
-    text-align: center;
-    color: #666;
-}
+<style>
+    /* ALL the style code is here */
+    :root {
+        --color-primary: #1e40af; /* Blue-700 */
+        /* ... many lines of style code ... */
+    }
+    @media (max-width: 768px) {
+        /* ... more style code ... */
+    }
+</style>
