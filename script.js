@@ -1,5 +1,14 @@
-// 1. DATA STORAGE (The original 259 terms + 35 new terms + 30 new terms = 329 total)
+// 1. DATA STORAGE (The core list of 329 accounting/finance terms)
+// Note: I've truncated the list here for space, but ensure your full list is present.
 const allTerms = [
+    // Financial Statements (15 terms)
+    { term: "Balance Sheet", category: "Financial Statements", definition: "A financial statement that reports a company's assets, liabilities, and shareholder equity at a specific point in time.", example: "Company with $500K assets, $200K liabilities has $300K equity." },
+    { term: "Income Statement", category: "Financial Statements", definition: "A report showing a company's financial performance over a specific period, detailing revenues, expenses, and net income.", example: "Revenue $1M minus expenses $700K equals net income $300K." },
+    { term: "Cash Flow Statement", category: "Financial Statements", definition: "A report summarizing the amount of cash and cash equivalents entering and leaving a company, broken down by operating, investing, and financing activities.", example: "$100K operations, -$50K investing, $20K financing." },
+    // ... (Your 326 other terms go here)
+    { term: "Zero-Based Budgeting (ZBB)", category: "Budgeting & Planning", definition: "An approach to budgeting that requires all expenses to be justified for each new period, starting from a 'zero base.'", example: "Instead of increasing last year's travel budget by 10%, ZBB requires justifying every travel cost from scratch." },
+    { term: "Working Capital", category: "Ratios & Analysis", definition: "The difference between a company's current assets and its current liabilities. It measures liquidity.", example: "Current assets of $50,000 minus current liabilities of $30,000 equals $20,000 working capital." },
+];
     // Financial Statements (15 terms)
     { term: "Balance Sheet", category: "Financial Statements", definition: "Financial statement reporting assets, liabilities, and equity.", example: "Company with $500K assets, $200K liabilities has $300K equity." },
     { term: "Income Statement", category: "Financial Statements", definition: "Shows revenues, expenses, and net income.", example: "Revenue $1M minus expenses $700K equals net income $300K." },
@@ -380,96 +389,142 @@ const allTerms = [
     { term: "Intercompany Transaction", category: "Corporate Accounting", definition: "Transactions between a parent company and its subsidiary.", example: "Parent company sells inventory to a subsidiary; must be eliminated during consolidation." },
 ];
 
-// 2. STATE AND INITIALIZATION
-let currentCategory = 'All';
-// Ensure elements are available by checking the document
-const termsOutput = document.getElementById('terms-output');
+// 2. GLOBAL VARIABLES AND SETUP
+const uniqueCategories = ['All', ...new Set(allTerms.map(term => term.category))].sort();
+let currentCategory = 'All'; // Default to show all terms
 const searchInput = document.getElementById('search-input');
+const termsOutput = document.getElementById('terms-output');
 const categoryList = document.getElementById('category-list');
+const modal = document.getElementById('term-modal');
+const closeButton = document.querySelector('.close-button');
 
-// Get unique categories and ensure 'All' is first
-const uniqueCategories = ['All', ...new Set(allTerms.map(t => t.category))];
 
-// 3. CORE RENDERING FUNCTION
+// 3. MAIN RENDER FUNCTION (***THIS IS THE FIX***)
 function renderTerms() {
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    
-    // 3.1. Filter Terms
-    const filteredTerms = allTerms.filter(term => {
-        const categoryMatch = currentCategory === 'All' || term.category === currentCategory;
-        
-        const searchMatch = searchTerm === '' || 
-                            term.term.toLowerCase().includes(searchTerm) ||
-                            term.definition.toLowerCase().includes(searchTerm) ||
-                            term.example.toLowerCase().includes(searchTerm);
-                            
-        return categoryMatch && searchMatch;
-    });
+    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+    let filteredTerms = allTerms;
 
-    // 3.2. Generate HTML
-    if (filteredTerms.length === 0) {
-        // Check if output element exists before trying to set innerHTML
-        if (termsOutput) {
-            termsOutput.innerHTML = `
-                <div class="empty-state">
-                    <h3>No terms found for "${searchTerm}" in the selected category.</h3>
-                    <p>Try clearing your search or selecting a different category.</p>
-                </div>
-            `;
-        }
-        return;
+    // Filter by category
+    if (currentCategory && currentCategory !== 'All') {
+        filteredTerms = filteredTerms.filter(term => term.category === currentCategory);
     }
 
-    const termsHtml = filteredTerms.map(term => `
-        <div class="term-card">
-            <div class="category-tag">${term.category}</div>
-            <h2>${term.term}</h2>
-            <p>${term.definition}</p>
-            <strong>Example:</strong>
-            <p class="example">${term.example}</p>
-        </div>
-    `).join('');
+    // Filter by search term
+    if (searchTerm) {
+        filteredTerms = filteredTerms.filter(term =>
+            term.term.toLowerCase().includes(searchTerm) ||
+            term.definition.toLowerCase().includes(searchTerm) ||
+            (term.example && term.example.toLowerCase().includes(searchTerm))
+        );
+    }
 
-    // Check if output element exists before trying to set innerHTML
+    // Generate HTML for each term
+    const termsHtml = filteredTerms.map(term => {
+        // ✅ FIX: The full HTML card is returned here, including the definition.
+        return `
+            <div class="term-card" data-term="${term.term}">
+                <h3 class="term-title">${term.term}</h3>
+                <p class="term-brief">${term.definition}</p> 
+                <button class="view-details-btn">View Details</button>
+            </div>
+        `;
+    }).join('');
+
+    // Update the main content inner HTML
     if (termsOutput) {
-        termsOutput.innerHTML = `<div class="terms-grid">${termsHtml}</div>`;
+        if (termsHtml.length === 0) {
+            termsOutput.innerHTML = `
+                <div class="no-results">
+                    <h2>No Terms Found</h2>
+                    <p>Try broadening your search or selecting a different category.</p>
+                </div>
+            `;
+        } else {
+            termsOutput.innerHTML = `<div class="terms-grid">${termsHtml}</div>`;
+        }
     }
 }
 
 // 4. CATEGORY RENDER & EVENT LISTENERS
 function renderCategories() {
-    // Check if category list element exists
     if (!categoryList) return; 
 
     categoryList.innerHTML = uniqueCategories.map(category => {
         const isActive = category === currentCategory ? 'active' : '';
+        // Count terms for the category
+        const count = allTerms.filter(t => category === 'All' || t.category === category).length;
+        
         return `
             <li class="category-item">
                 <button class="${isActive}" data-category="${category}">
-                    ${category} (${allTerms.filter(t => category === 'All' || t.category === category).length})
+                    ${category} (${count})
                 </button>
             </li>
         `;
     }).join('');
 }
 
-// 5. ATTACH EVENT LISTENERS AND INITIAL PAGE LOAD
-// Use 'DOMContentLoaded' to ensure all HTML elements are loaded before running the script
+// 5. MODAL LOGIC (Shows the full details when 'View Details' is clicked)
+function showTermDetails(termName) {
+    const term = allTerms.find(t => t.term === termName);
+    if (!term || !modal) return;
+
+    document.getElementById('modal-term').textContent = term.term;
+    document.getElementById('modal-definition').textContent = term.definition;
+    document.getElementById('modal-category').textContent = term.category;
+    document.getElementById('modal-example').textContent = term.example || "No specific example provided for this term."; // Handle missing example
+
+    modal.style.display = 'block';
+}
+
+function hideModal() {
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+
+// 6. ATTACH EVENT LISTENERS AND INITIAL PAGE LOAD
 document.addEventListener('DOMContentLoaded', () => {
+    // Search input listener
     if (searchInput) {
         searchInput.addEventListener('input', renderTerms);
     }
     
+    // Category click listener
     if (categoryList) {
         categoryList.addEventListener('click', (event) => {
             const button = event.target.closest('button');
             if (button) {
                 currentCategory = button.dataset.category;
-                renderCategories(); // Re-render categories to update active state
-                renderTerms(); // Re-render terms based on new category
+                renderCategories(); 
+                renderTerms(); 
             }
         });
     }
+
+    // Term card click listener (for 'View Details' button)
+    if (termsOutput) {
+        termsOutput.addEventListener('click', (event) => {
+            const button = event.target.closest('.view-details-btn');
+            if (button) {
+                const termCard = button.closest('.term-card');
+                const termName = termCard.dataset.term;
+                showTermDetails(termName);
+            }
+        });
+    }
+
+    // Modal close listeners
+    if (closeButton) {
+        closeButton.addEventListener('click', hideModal);
+    }
+    // Close modal when clicking outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            hideModal();
+        }
+    });
 
     // Initial page load
     renderCategories();
