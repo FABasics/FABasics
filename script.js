@@ -481,31 +481,98 @@ function renderTerms() {
         );
     }
 
-    // 4. GENERATE THE HTML FOR EACH TERM
-    const termsHtml = filteredTerms.map(term => {
-        // --- ✅ FIX APPLIED: This HTML structure includes the definition for display ---
+// 4. CATEGORY GENERATION
+function renderCategories() {
+    const categories = ['All', ...new Set(allTerms.map(term => term.category))];
+    const categoryButtons = categories.map(category => {
+        const isActive = category === currentCategory ? 'active' : '';
         return `
-            <div class="term-card" data-term="${term.term}">
-                <h3 class="term-title">${term.term}</h3>
-                <p class="term-brief">${term.definition}</p> 
-                <button class="view-details-btn">View Details</button>
-            </div>
+            <li class="category-item">
+                <button class="${isActive}" data-category="${category}">
+                    ${category}
+                </button>
+            </li>
         `;
     }).join('');
-
-    // 5. Update the main content inner HTML
-    const termsOutput = document.getElementById('terms-output');
-    if (termsOutput) {
-        // Display a message if no terms are found
-        if (termsHtml.length === 0) {
-            termsOutput.innerHTML = `
-                <div class="no-results">
-                    <h2>No Terms Found</h2>
-                    <p>Try broadening your search or selecting a different category.</p>
-                </div>
-            `;
-        } else {
-            termsOutput.innerHTML = `<div class="terms-grid">${termsHtml}</div>`;
-        }
+    
+    if (categoryList) {
+        categoryList.innerHTML = categoryButtons;
     }
 }
+
+// 5. EVENT LISTENERS
+function attachEventListeners() {
+    // Category filter buttons
+    if (categoryList) {
+        categoryList.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                currentCategory = e.target.dataset.category;
+                renderCategories();
+                renderTerms();
+            }
+        });
+    }
+
+    // Search input
+    if (searchInput) {
+        searchInput.addEventListener('input', renderTerms);
+    }
+
+    // View Details buttons (Modal)
+    if (termsOutput) {
+        termsOutput.addEventListener('click', (e) => {
+            if (e.target.classList.contains('view-details-btn')) {
+                const termCard = e.target.closest('.term-card');
+                const termName = termCard.dataset.term;
+                const termData = allTerms.find(t => t.term === termName);
+                
+                if (termData) {
+                    openModal(termData);
+                }
+            }
+        });
+    }
+}
+
+// 6. MODAL FUNCTIONS
+function openModal(termData) {
+    const modal = document.getElementById('term-modal');
+    const modalTerm = document.getElementById('modal-term');
+    const modalDefinition = document.getElementById('modal-definition');
+    const modalExample = document.getElementById('modal-example');
+    
+    if (modal && modalTerm && modalDefinition && modalExample) {
+        modalTerm.textContent = termData.term;
+        modalDefinition.textContent = termData.definition;
+        modalExample.textContent = termData.example || 'No example available.';
+        modal.style.display = 'block';
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('term-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Close modal when clicking the X button
+const closeButton = document.querySelector('.close-button');
+if (closeButton) {
+    closeButton.addEventListener('click', closeModal);
+}
+
+// Close modal when clicking outside of it
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('term-modal');
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+
+// 7. INITIALIZE ON PAGE LOAD
+document.addEventListener('DOMContentLoaded', () => {
+    renderCategories();
+    renderTerms();
+    attachEventListeners();
+});
