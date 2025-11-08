@@ -426,148 +426,142 @@ let currentCategory = 'All';
 
 // 3. MAIN RENDER FUNCTION
 function renderTerms() {
-    const searchInput = document.getElementById('search-input');
-    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-    let filteredTerms = allTerms;
+  const searchInput = document.getElementById('search-input');
+  const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+  let filteredTerms = allTerms;
 
-    // Filter by category
-    if (currentCategory && currentCategory !== 'All') {
-        filteredTerms = filteredTerms.filter(term => term.category === currentCategory);
+  // Filter by category
+  if (currentCategory && currentCategory !== 'All') {
+    filteredTerms = filteredTerms.filter(term => term.category === currentCategory);
+  }
+  // Filter by search term
+  if (searchTerm) {
+    filteredTerms = filteredTerms.filter(term =>
+      term.term.toLowerCase().includes(searchTerm) ||
+      term.definition.toLowerCase().includes(searchTerm) ||
+      (term.example && term.example.toLowerCase().includes(searchTerm))
+    );
+  }
+
+  // Generate HTML
+  const termsHtml = filteredTerms.map(term => `
+    <div class="term-card" data-term="${term.term}">
+      <h3 class="term-title">${term.term}</h3>
+      <p class="term-brief">${term.definition}</p>
+      <button class="view-details-btn">View Details</button>
+    </div>
+  `).join('');
+
+  const termsOutput = document.getElementById('terms-output');
+  if (termsOutput) {
+    if (filteredTerms.length === 0) {
+      termsOutput.innerHTML = `
+        <div class="no-results">
+          <h2>No Terms Found</h2>
+          <p>Try broadening your search or selecting a different category.</p>
+        </div>
+      `;
+    } else {
+      termsOutput.innerHTML = `<div class="terms-grid">${termsHtml}</div>`;
     }
-
-    // Filter by search term
-    if (searchTerm) {
-        filteredTerms = filteredTerms.filter(term =>
-            term.term.toLowerCase().includes(searchTerm) ||
-            term.definition.toLowerCase().includes(searchTerm) ||
-            (term.example && term.example.toLowerCase().includes(searchTerm))
-        );
-    }
-
-    // Generate HTML
-    const termsHtml = filteredTerms.map(term => {
-        return `
-            <div class="term-card" data-term="${term.term}">
-                <h3 class="term-title">${term.term}</h3>
-                <p class="term-brief">${term.definition}</p> 
-                <button class="view-details-btn">View Details</button>
-            </div>
-        `;
-    }).join('');
-
-    const termsOutput = document.getElementById('terms-output');
-    if (termsOutput) {
-        if (filteredTerms.length === 0) {
-            termsOutput.innerHTML = `
-                <div class="no-results">
-                    <h2>No Terms Found</h2>
-                    <p>Try broadening your search or selecting a different category.</p>
-                </div>
-            `;
-        } else {
-            termsOutput.innerHTML = `<div class="terms-grid">${termsHtml}</div>`;
-        }
-    }
+  }
 }
 
 // 4. CATEGORY GENERATION
 function renderCategories() {
-    const categories = ['All', ...new Set(allTerms.map(term => term.category))];
-    const categoryButtons = categories.map(category => {
-        const isActive = category === currentCategory ? 'active' : '';
-        return `
-            <li class="category-item">
-                <button class="${isActive}" data-category="${category}">
-                    ${category}
-                </button>
-            </li>
-        `;
-    }).join('');
-    
-    const categoryList = document.getElementById('category-list');
-    if (categoryList) {
-        categoryList.innerHTML = categoryButtons;
-    }
+  const categories = ['All', ...new Set(allTerms.map(term => term.category))];
+  const categoryButtons = categories.map(category => {
+    const isActive = category === currentCategory ? 'active' : '';
+    return `<li class="category-item"><button class="${isActive}" data-category="${category}">${category}</button></li>`;
+  }).join('');
+
+  const categoryList = document.getElementById('category-list');
+  if (categoryList) {
+    categoryList.innerHTML = categoryButtons;
+  }
 }
 
 // 5. EVENT LISTENERS
 function attachEventListeners() {
-    const categoryList = document.getElementById('category-list');
-    const searchInput = document.getElementById('search-input');
-    const termsOutput = document.getElementById('terms-output');
+  const categoryList = document.getElementById('category-list');
+  const searchInput = document.getElementById('search-input');
+  const termsOutput = document.getElementById('terms-output');
 
-    // Category filter buttons
-    if (categoryList) {
-        categoryList.addEventListener('click', (e) => {
-            if (e.target.tagName === 'BUTTON') {
-                currentCategory = e.target.dataset.category;
-                renderCategories();
-                renderTerms();
-            }
-        });
-    }
+  // Category filter buttons
+  if (categoryList) {
+    categoryList.addEventListener('click', e => {
+      if (e.target.tagName === 'BUTTON') {
+        currentCategory = e.target.dataset.category;
+        renderCategories();
+        renderTerms();
+      }
+    });
+  }
 
-    // Search input
-    if (searchInput) {
-        searchInput.addEventListener('input', renderTerms);
-    }
+  // Search input
+  if (searchInput) {
+    searchInput.addEventListener('input', renderTerms);
+  }
 
-    // View Details buttons
-    if (termsOutput) {
-        termsOutput.addEventListener('click', (e) => {
-            if (e.target.classList.contains('view-details-btn')) {
-                const termCard = e.target.closest('.term-card');
-                const termName = termCard.dataset.term;
-                const termData = allTerms.find(t => t.term === termName);
-                
-                if (termData) {
-                    openModal(termData);
-                }
-            }
-        });
-    }
+  // View Details buttons
+  if (termsOutput) {
+    termsOutput.addEventListener('click', e => {
+      if (e.target.classList.contains('view-details-btn')) {
+        const termCard = e.target.closest('.term-card');
+        const termName = termCard.dataset.term;
+        const termData = allTerms.find(t => t.term === termName);
+        if (termData) openModal(termData);
+      }
+    });
+  }
+
+  // Modal close (X button)
+  const closeButton = document.querySelector('.close-button');
+  if (closeButton) closeButton.addEventListener('click', closeModal);
+
+  // Close modal when clicking outside modal
+  window.addEventListener('click', e => {
+    const modal = document.getElementById('term-modal');
+    if (e.target === modal) closeModal();
+  });
 }
 
 // 6. MODAL FUNCTIONS
 function openModal(termData) {
-    const modal = document.getElementById('term-modal');
-    const modalTerm = document.getElementById('modal-term');
-    const modalDefinition = document.getElementById('modal-definition');
-    const modalExample = document.getElementById('modal-example');
-    
-    if (modal && modalTerm && modalDefinition && modalExample) {
-        modalTerm.textContent = termData.term;
-        modalDefinition.textContent = termData.definition;
-        modalExample.textContent = termData.example || 'No example available.';
-        modal.style.display = 'block';
-    }
-}
+  const modal = document.getElementById('term-modal');
+  const modalTerm = document.getElementById('modal-term');
+  const modalDefinition = document.getElementById('modal-definition');
+  const modalExample = document.getElementById('modal-example');
 
+  if (modal && modalTerm && modalDefinition && modalExample) {
+    modalTerm.textContent = termData.term;
+    modalDefinition.textContent = termData.definition;
+    modalExample.textContent = termData.example || 'No example available.';
+    modal.style.display = 'block';
+  }
+}
 function closeModal() {
-    const modal = document.getElementById('term-modal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
+  const modal = document.getElementById('term-modal');
+  if (modal) modal.style.display = 'none';
 }
 
-// Close modal when clicking X
-const closeButton = document.querySelector('.close-button');
-if (closeButton) {
-    closeButton.addEventListener('click', closeModal);
-}
-
-// Close modal when clicking outside
-window.addEventListener('click', (e) => {
-    const modal = document.getElementById('term-modal');
-    if (e.target === modal) {
-        closeModal();
-    }
-});
-
-// 7. INITIALIZE ON PAGE LOAD
+// 7. CONDITIONAL INIT FOR TABS (Terms vs FAQs/About)
 document.addEventListener('DOMContentLoaded', () => {
-    console.log(`Loaded ${allTerms.length} accounting and finance terms`);
+  // Hide categories/search on FAQ/About tabs by checking for 'faq' or 'about' in the body class or id
+  const isFAQTab = !!document.getElementById('faq-content');
+  const isAboutTab = !!document.getElementById('about-content');
+  // Only show search/categories/terms-output if not FAQ/About
+  if (!isFAQTab && !isAboutTab) {
     renderCategories();
     renderTerms();
     attachEventListeners();
+  } else {
+    // Optional: Hide elements not needed on FAQ/About page
+    const elCategory = document.getElementById('category-list');
+    const elSearch = document.getElementById('search-input');
+    const elTerms = document.getElementById('terms-output');
+    if (elCategory) elCategory.style.display = 'none';
+    if (elSearch) elSearch.style.display = 'none';
+    if (elTerms) elTerms.style.display = 'none';
+  }
 });
