@@ -454,42 +454,36 @@ const allTerms = [
     { term: "Off-Balance Sheet Financing", category: "Corporate Accounting", definition: "Obligations not reported as liabilities on the balance sheet.", example: "Certain operating leases or joint venture debt (before IFRS 16/ASC 842)." },
     { term: "Intercompany Transaction", category: "Corporate Accounting", definition: "Transactions between a parent company and its subsidiary.", example: "Parent company sells inventory to a subsidiary; must be eliminated during consolidation." },
 ];
-
-// 2. GLOBAL VARIABLES
+// 2. STATE AND INITIALIZATION
+let currentCategory = 'All';
+// Ensure elements are available by checking the document
+const termsOutput = document.getElementById('terms-output');
 const searchInput = document.getElementById('search-input');
 const categoryList = document.getElementById('category-list');
-const termsOutput = document.getElementById('terms-output');
-const modal = document.getElementById('term-modal');
-const closeButton = document.querySelector('.close-button');
 
-let currentCategory = 'All'; // Default category
-
-// Get all unique categories from the data, plus an "All" option
-const uniqueCategories = ['All', ...new Set(allTerms.map(term => term.category))].sort();
-
-
-// 3. MAIN RENDER FUNCTION (***THIS IS THE FIXED FUNCTION***)
+// 3. MAIN RENDER FUNCTION
 function renderTerms() {
+    // 1. Get search term and initialize filteredTerms
     const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
     let filteredTerms = allTerms;
 
-    // Filter 1: by category
+    // 2. Filter by category
     if (currentCategory && currentCategory !== 'All') {
         filteredTerms = filteredTerms.filter(term => term.category === currentCategory);
     }
 
-    // Filter 2: by search term
+    // 3. Filter by search term
     if (searchTerm) {
         filteredTerms = filteredTerms.filter(term =>
             term.term.toLowerCase().includes(searchTerm) ||
             term.definition.toLowerCase().includes(searchTerm) ||
-            (term.example && term.example.toLowerCase().includes(searchTerm))
+            (term.example && term.example.toLowerCase().includes(searchTerm)) // Check for example too
         );
     }
 
-    // 3. GENERATE THE HTML FOR EACH TERM
+    // 4. GENERATE THE HTML FOR EACH TERM
     const termsHtml = filteredTerms.map(term => {
-        // ✅ FIX APPLIED: The HTML structure now correctly includes the 'term-brief' with the definition.
+        // --- ✅ FIX APPLIED: This HTML structure includes the definition for display ---
         return `
             <div class="term-card" data-term="${term.term}">
                 <h3 class="term-title">${term.term}</h3>
@@ -499,10 +493,11 @@ function renderTerms() {
         `;
     }).join('');
 
-    // 4. Update the main content inner HTML
+    // 5. Update the main content inner HTML
+    const termsOutput = document.getElementById('terms-output');
     if (termsOutput) {
+        // Display a message if no terms are found
         if (termsHtml.length === 0) {
-            // No results message
             termsOutput.innerHTML = `
                 <div class="no-results">
                     <h2>No Terms Found</h2>
@@ -514,91 +509,3 @@ function renderTerms() {
         }
     }
 }
-
-
-// 4. CATEGORY RENDER & EVENT LISTENERS
-function renderCategories() {
-    if (!categoryList) return; 
-
-    // Generate HTML for all category buttons
-    categoryList.innerHTML = uniqueCategories.map(category => {
-        const isActive = category === currentCategory ? 'active' : '';
-        // Calculate the count of terms for the category
-        const count = allTerms.filter(t => category === 'All' || t.category === category).length;
-        
-        return `
-            <li class="category-item">
-                <button class="${isActive}" data-category="${category}">
-                    ${category} (${count})
-                </button>
-            </li>
-        `;
-    }).join('');
-}
-
-
-// 5. MODAL LOGIC
-function showModal(termName) {
-    const term = allTerms.find(t => t.term === termName);
-    if (term) {
-        document.getElementById('modal-term').textContent = term.term;
-        document.getElementById('modal-definition').textContent = term.definition;
-        document.getElementById('modal-example').textContent = term.example || 'No specific example provided.';
-        modal.style.display = 'block';
-    }
-}
-
-function hideModal() {
-    modal.style.display = 'none';
-}
-
-
-// 6. ATTACH EVENT LISTENERS AND INITIAL PAGE LOAD
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // Search Input Listener
-    if (searchInput) {
-        searchInput.addEventListener('input', renderTerms);
-    }
-    
-    // Category Filter Listener
-    if (categoryList) {
-        categoryList.addEventListener('click', (event) => {
-            const button = event.target.closest('button');
-            if (button) {
-                currentCategory = button.dataset.category;
-                renderCategories(); // Re-render categories to update active state
-                renderTerms();      // Re-render terms based on new category
-            }
-        });
-    }
-
-    // Term Details (Modal) Listener - uses event delegation on the main output area
-    if (termsOutput) {
-        termsOutput.addEventListener('click', (event) => {
-            const button = event.target.closest('.view-details-btn');
-            if (button) {
-                const termCard = button.closest('.term-card');
-                const termName = termCard.dataset.term;
-                showModal(termName);
-            }
-        });
-    }
-
-    // Modal Close Button Listener
-    if (closeButton) {
-        closeButton.addEventListener('click', hideModal);
-    }
-    
-    // Close modal when user clicks outside of it
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            hideModal();
-        }
-    });
-
-
-    // Initial page load
-    renderCategories();
-    renderTerms();
-});
