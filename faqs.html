@@ -68,4 +68,119 @@
 </div> 
 
 </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions - Accounting Dictionary</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+
+    <style>
+        .faq-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-top: 20px;
+        }
+        .faq-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--color-secondary); /* Using secondary color for FAQs */
+        }
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            cursor: pointer;
+            padding-right: 15px;
+            list-style: none; 
+            display: flex;
+            align-items: center;
+        }
+        .faq-question::-webkit-details-marker {
+            display: none;
+        }
+        /* Custom arrow styling */
+        .faq-question::before {
+            content: "▶";
+            margin-right: 10px;
+            font-size: 0.8em;
+            transition: transform 0.2s;
+            color: var(--color-secondary);
+        }
+        details[open] .faq-question::before {
+            content: "▼";
+        }
+        .faq-answer {
+            margin-top: 15px;
+            padding-left: 20px;
+            border-top: 1px solid var(--color-light);
+            padding-top: 15px;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container"> 
+    
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <ul class="category-list" id="navigation-list">
+            <li class="category-item"><a href="index.html"><button>📚 Browse All Terms</button></a></li>
+            <li class="category-item"><a href="faqs.html"><button class="active">❓ Frequently Asked Questions</button></a></li>
+            <li class="category-item"><a href="about.html"><button>💡 About This Project</button></a></li>
+        </ul>
+        
+        <h2>Categories</h2>
+        <ul class="category-list" id="category-list">
+        </ul>
+    </div>
+    
+    <div class="main-content"> 
+        <header>
+            <h1>Frequently Asked Questions</h1>
+            <p>Answers to common questions about this dictionary and its content.</p>
+        </header>
+
+        <main id="faqs-output">
+            <div class="faq-section">
+                
+                <details class="faq-item">
+                    <summary class="faq-question">How do I search for a specific term?</summary>
+                    <p class="faq-answer">Use the search bar at the top of the <a href="index.html">**Browse All Terms**</a> page. You can search by the **term name**, its **definition**, or the **example** given for the term.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">How often is the dictionary updated?</summary>
+                    <p class="faq-answer">The dictionary is regularly reviewed and updated, typically on a **quarterly basis**, to include new terms, clarify existing definitions, and reflect changes in accounting standards (like GAAP or IFRS).</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">Why don't the categories show on the FAQ page?</summary>
+                    <p class="faq-answer">The term categories are designed to appear only on the main <a href="index.html">**Browse All Terms**</a> page to keep the navigation simple and focused on content for the current page.</p>
+                </details>
+                
+                <details class="faq-item">
+                    <summary class="faq-question">What is the difference between Accounting and Finance terms?</summary>
+                    <p class="faq-answer">**Accounting** focuses on *recording and reporting* past financial transactions. **Finance** focuses on the *management and allocation* of money for the future (e.g., budgeting, investing, risk). We cover both as they are closely linked in business.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">Where is the term data stored?</summary>
+                    <p class="faq-answer">All **329 terms** (including their definitions and examples) are stored directly inside the **<code>script.js</code>** file for maximum simplicity and quick loading.</p>
+                </details>
+
+            </div>
+        </main>
+    </div> 
+    
+</div> 
+
+</body>
 </html>
