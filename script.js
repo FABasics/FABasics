@@ -1,6 +1,72 @@
-// 1. DATA STORAGE (The core list of 329 accounting/finance terms)
-// Note: I've truncated the list here for space, but ensure your full list is present.
+// 1. DATA STORAGE (329 Terms)
 const allTerms = [
+    // Financial Statements (15 terms)
+    { term: "Balance Sheet", category: "Financial Statements", definition: "A financial statement that reports a company's assets, liabilities, and shareholders' equity at a specific point in time.", example: "A company with $500K in assets and $200K in liabilities has $300K in equity." },
+    { term: "Income Statement", category: "Financial Statements", definition: "A financial statement that shows a company's revenues, expenses, and resulting net income or loss over a period of time.", example: "Revenue of $1M minus expenses of $700K equals a net income of $300K." },
+    { term: "Cash Flow Statement", category: "Financial Statements", definition: "A financial statement that summarizes the amount of cash and cash equivalents entering and leaving a company, grouped by operations, investing, and financing activities.", example: "The statement shows $100K from operations, -$50K from investing, and $20K from financing." },
+    { term: "Retained Earnings", category: "Financial Statements", definition: "The cumulative net income of a company since its inception, less total dividends paid out to shareholders.", example: "Starting retained earnings of $200K plus $50K net income minus $10K dividends results in $240K retained earnings." },
+    { term: "Trial Balance", category: "Financial Statements", definition: "A bookkeeping worksheet in which the balances of all ledgers are compiled into debit and credit columns to ensure total debits equal total credits.", example: "The total of all debit accounts is $500K, which exactly equals the total of all credit accounts." },
+    { term: "Pro Forma", category: "Financial Statements", definition: "Projected financial statements that forecast a company's future performance under various assumptions.", example: "Management provided a Pro Forma for 2025, forecasting revenue at $2M based on a projected 20% growth rate." },
+    { term: "Consolidated Statements", category: "Financial Statements", definition: "Financial statements that combine the financial results of a parent company and all of its subsidiaries into a single set of reports.", example: "Apple's Consolidated Statements include the performance of all its global divisions and subsidiaries." },
+    { term: "Non-GAAP Measures", category: "Financial Statements", definition: "Financial metrics that are not prepared in accordance with Generally Accepted Accounting Principles (GAAP), often used by management to highlight operational performance (e.g., EBITDA).", example: "The press release focused on adjusted EBITDA, a Non-GAAP measure, to show core profitability." },
+    { term: "Footnotes", category: "Financial Statements", definition: "Detailed notes accompanying a financial statement that provide further explanations, accounting policies, and breakdown of complex items.", example: "The Footnotes revealed a detailed breakdown of the goodwill impairment charge." },
+    { term: "Fiscal Year", category: "Financial Statements", definition: "A one-year period that a company uses for financial reporting and budgeting, which may or may not coincide with the calendar year.", example: "Microsoft's Fiscal Year ends on June 30th, not December 31st." },
+    { term: "Interim Financials", category: "Financial Statements", definition: "Financial statements covering a period shorter than a full fiscal year, such as quarterly or semi-annually.", example: "The company releases its Interim Financials (quarterly reports) to investors." },
+    { term: "Statement of Equity", category: "Financial Statements", definition: "A financial statement that details the changes in the equity section of the balance sheet over a period of time.", example: "The Statement of Equity showed the impact of a new stock issuance and share repurchases." },
+    { term: "Materiality", category: "Financial Statements", definition: "The concept that an omission or misstatement of an item in a financial report is material if it could influence the economic decision of users.", example: "A $100 error is immaterial to a company with $1 billion in revenue." },
+    { term: "Going Concern", category: "Financial Statements", definition: "The assumption that a company will continue to operate indefinitely and not be forced to liquidate its assets.", example: "The auditor noted a risk to the company's Going Concern status due to significant operating losses." },
+    { term: "Accrual Accounting", category: "Financial Statements", definition: "An accounting method where revenue or expenses are recorded when a transaction occurs rather than when payment is received or made.", example: "The company recorded sales revenue in December, even though the cash was collected in January." },
+
+    // Core Accounting Concepts (20 terms)
+    { term: "Debit", category: "Core Accounting", definition: "An entry on the left side of a ledger account; increases asset and expense accounts, decreases liability, equity, and revenue accounts.", example: "The company Debited the Cash account when receiving payment from a customer." },
+    { term: "Credit", category: "Core Accounting", definition: "An entry on the right side of a ledger account; increases liability, equity, and revenue accounts, decreases asset and expense accounts.", example: "The company Credited the Sales Revenue account upon making a sale." },
+    { term: "General Ledger", category: "Core Accounting", definition: "A complete record of all the financial transactions of a company, containing all the accounts needed to prepare financial statements.", example: "The accountant examined the General Ledger to trace a large expense item." },
+    { term: "Asset", category: "Core Accounting", definition: "A resource controlled by the company as a result of past events and from which future economic benefits are expected to flow.", example: "Cash, Accounts Receivable, and Equipment are common Assets." },
+    { term: "Liability", category: "Core Accounting", definition: "A present obligation of the company arising from past events, the settlement of which is expected to result in an outflow of resources.", example: "Accounts Payable, Loans Payable, and Unearned Revenue are Liabilities." },
+    { term: "Equity", category: "Core Accounting", definition: "The residual interest in the assets of the company after deducting all its liabilities (Assets - Liabilities).", example: "Shareholders' Equity represents the owners' stake in the company." },
+    { term: "Depreciation", category: "Core Accounting", definition: "The systematic reduction in the value of a tangible asset over its useful life, recorded as an expense on the income statement.", example: "A machine purchased for $100K with a 10-year life depreciates by $10K per year." },
+    { term: "Amortization", category: "Core Accounting", definition: "The systematic reduction in the value of an intangible asset (like a patent or goodwill) over its useful life.", example: "A $50K patent with a 5-year life is Amortized by $10K per year." },
+    { term: "Chart of Accounts", category: "Core Accounting", definition: "A list of all financial accounts used in a company's general ledger, typically organized by category (Assets, Liabilities, Equity, Revenue, Expense).", example: "The company updated its Chart of Accounts to include a new 'Cloud Subscription Expense' line." },
+    { term: "Journal Entry", category: "Core Accounting", definition: "The first step in the accounting cycle, where a business transaction is formally recorded, showing at least one debit and one credit.", example: "A Journal Entry was made to debit cash and credit sales revenue for a transaction." },
+    { term: "Unearned Revenue", category: "Core Accounting", definition: "A liability account that represents money received from a customer for goods or services that have not yet been delivered or rendered.", example: "A software company received $1,200 for a 1-year subscription upfront, recording it as Unearned Revenue." },
+    { term: "Accrued Expenses", category: "Core Accounting", definition: "Expenses that have been incurred but have not yet been paid or recorded in the books (e.g., salaries payable or interest payable).", example: "Salaries for the last week of December are recorded as Accrued Expenses on the year-end Balance Sheet." },
+    { term: "Capital Expenditure (CapEx)", category: "Core Accounting", definition: "Funds used by a company to acquire, upgrade, and maintain physical assets such as property, industrial buildings, or equipment.", example: "The purchase of a new factory building for $5 million is a CapEx." },
+    { term: "Operating Expense (OpEx)", category: "Core Accounting", definition: "Expenditures a business incurs to run its day-to-day operations, such as rent, utilities, and salaries.", example: "Monthly rent of $5,000 for office space is an OpEx." },
+    { term: "Double-Entry Bookkeeping", category: "Core Accounting", definition: "An accounting system where every transaction is recorded in at least two accounts, with total debits always equaling total credits.", example: "Selling a product requires a debit to Cash and a credit to Sales Revenue." },
+    { term: "Matching Principle", category: "Core Accounting", definition: "An accounting principle that requires expenses to be recorded in the same period as the revenue they helped generate.", example: "The cost of goods sold is recorded in the same month as the revenue from those sales." },
+    { term: "Conservatism Principle", category: "Core Accounting", definition: "A principle requiring that when faced with uncertainty, judgment should tend toward understating assets and revenues and overstating liabilities and expenses.", example: "Inventory is valued at the lower of cost or market value." },
+    { term: "Revenue Recognition", category: "Core Accounting", definition: "The specific criteria that must be met for revenue to be recorded in a company's financial statements, generally when goods are delivered or services are rendered.", example: "A company recognizes subscription revenue monthly, not when the annual cash payment is received." },
+    { term: "Book Value", category: "Core Accounting", definition: "The value of an asset as it appears on the balance sheet, calculated as the asset's original cost minus any accumulated depreciation or amortization.", example: "A machine bought for $100K with $30K in accumulated depreciation has a Book Value of $70K." },
+    { term: "Impairment", category: "Core Accounting", definition: "A permanent reduction in the value of a company's asset, typically a non-cash charge that reduces the asset's Book Value to its fair value.", example: "The company recorded an Impairment charge on its goodwill after a major acquisition failed to perform as expected." },
+
+    // Financial Analysis & Metrics (25 terms)
+    { term: "EBITDA", category: "Financial Metrics", definition: "Earnings Before Interest, Taxes, Depreciation, and Amortization—a measure of a company's operating performance often used as a proxy for cash flow.", example: "A company with $1M in operating income, $50K depreciation, and $10K amortization has an EBITDA of $1.06M." },
+    { term: "Net Present Value (NPV)", category: "Financial Metrics", definition: "The difference between the present value of cash inflows and the present value of cash outflows over a period of time, used in capital budgeting.", example: "A project with a positive NPV is generally accepted, as it adds value to the company." },
+    { term: "Internal Rate of Return (IRR)", category: "Financial Metrics", definition: "The discount rate at which the Net Present Value (NPV) of all cash flows from a project equals zero; used to evaluate the attractiveness of an investment.", example: "If a project's IRR is 15% and the company's cost of capital is 10%, the project is likely pursued." },
+    { term: "Return on Equity (ROE)", category: "Financial Metrics", definition: "A profitability ratio that measures the amount of net income earned for each dollar invested by shareholders (Net Income / Shareholder Equity).", example: "An ROE of 15% means the company generates 15 cents of profit for every dollar of equity." },
+    { term: "Debt-to-Equity Ratio", category: "Financial Metrics", definition: "A leverage ratio that measures the proportion of a company's financing that comes from debt versus equity (Total Debt / Total Equity).", example: "A D/E ratio of 2.0 means the company uses twice as much debt as equity financing." },
+    { term: "Working Capital", category: "Financial Metrics", definition: "A measure of a company's liquidity, calculated as Current Assets minus Current Liabilities.", example: "Positive Working Capital indicates the company has enough short-term assets to cover its short-term debts." },
+    { term: "Current Ratio", category: "Financial Metrics", definition: "A liquidity ratio that measures a company's ability to pay short-term obligations (Current Assets / Current Liabilities).", example: "A Current Ratio of 2.5 means the company has $2.50 in current assets for every $1.00 in current liabilities." },
+    { term: "Quick Ratio (Acid-Test Ratio)", category: "Financial Metrics", definition: "A more stringent liquidity ratio that excludes inventory (and sometimes other less liquid current assets) from current assets (Quick Assets / Current Liabilities).", example: "The Quick Ratio of 1.2 is preferred over the Current Ratio when evaluating a retailer with a large inventory." },
+    { term: "Gross Margin", category: "Financial Metrics", definition: "The percentage of revenue that remains after subtracting the Cost of Goods Sold (Gross Profit / Revenue).", example: "A Gross Margin of 40% means 40 cents of profit is made on every dollar of sales before OpEx." },
+    { term: "Operating Margin", category: "Financial Metrics", definition: "The percentage of revenue that remains after subtracting all operating expenses, including COGS (Operating Income / Revenue).", example: "An Operating Margin of 20% indicates good efficiency in core business operations." },
+    { term: "Net Margin", category: "Financial Metrics", definition: "The percentage of revenue that remains after all expenses, including interest and taxes, have been deducted (Net Income / Revenue).", example: "A 10% Net Margin is the final profit percentage the company keeps." },
+    { term: "Return on Assets (ROA)", category: "Financial Metrics", definition: "A profitability ratio that indicates how profitable a company is relative to its total assets (Net Income / Total Assets).", example: "An ROA of 5% means the company generates 5 cents of profit for every dollar of assets." },
+    { term: "P/E Ratio (Price-to-Earnings Ratio)", category: "Financial Metrics", definition: "A valuation ratio of a company's current share price compared to its per-share earnings (Share Price / Earnings Per Share).", example: "A P/E Ratio of 20 means investors are willing to pay $20 for every $1 of current earnings." },
+    { term: "CAGR (Compound Annual Growth Rate)", category: "Financial Metrics", definition: "The mean annual growth rate of an investment over a specified period longer than one year, assuming the profits were reinvested.", example: "The company's revenue had a CAGR of 8% over the last five years." },
+    { term: "Discount Rate", category: "Financial Metrics", definition: "The interest rate used in discounted cash flow (DCF) analysis to determine the present value of future cash flows, often based on the company's cost of capital.", example: "A higher Discount Rate is used for riskier investments, resulting in a lower NPV." },
+    { term: "Free Cash Flow (FCF)", category: "Financial Metrics", definition: "The cash a company generates after accounting for cash outflows to support operations and maintain its capital assets (EBITDA - CapEx - Changes in Working Capital).", example: "FCF is the money the company has available to pay dividends, pay down debt, or pursue acquisitions." },
+    { term: "Days Sales Outstanding (DSO)", category: "Financial Metrics", definition: "A measure of the average number of days it takes for a company to collect payment after a sale has been made.", example: "A low DSO of 30 days is better than 90 days, indicating efficient collection." },
+    { term: "Inventory Turnover", category: "Financial Metrics", definition: "A measure of how many times a company's inventory is sold and replaced over a period (Cost of Goods Sold / Average Inventory).", example: "An Inventory Turnover of 10 means the company sells its entire inventory 10 times a year." },
+    { term: "Total Shareholder Return (TSR)", category: "Financial Metrics", definition: "A measure of the total return to shareholders, including both capital gains (stock price appreciation) and dividends paid.", example: "The stock had a TSR of 18% last year, comprised of 15% price increase and a 3% dividend yield." },
+    { term: "Economic Value Added (EVA)", category: "Financial Metrics", definition: "A measure of a company's financial performance based on the residual wealth calculated by subtracting its cost of capital from its operating profit.", example: "If a company's EVA is positive, it is creating value for its shareholders." },
+    { term: "Sunk Cost", category: "Financial Metrics", definition: "A cost that has already been incurred and cannot be recovered; it should not be considered in future business decisions.", example: "The $50K spent on R&D last year is a Sunk Cost and should be ignored when deciding whether to launch the product." },
+    { term: "Break-Even Point", category: "Financial Metrics", definition: "The level of sales at which total revenues equal total costs, resulting in zero profit.", example: "The company needs to sell 10,000 units to reach its Break-Even Point." },
+    { term: "Leverage", category: "Financial Metrics", definition: "The use of various financial instruments or borrowed capital (debt) to increase the potential return of an investment.", example: "High financial Leverage increases both potential returns and financial risk." },
+    { term: "Cost of Goods Sold (COGS)", category: "Financial Metrics", definition: "The direct costs attributable to the production of the goods or services sold by a company, including materials and direct labor.", example: "COGS includes the raw materials and factory labor to build the product." },
+    { term: "Capital Budgeting", category: "Financial Metrics", definition: "The process a business uses to determine which proposed fixed asset purchases or projects it should accept, using metrics like NPV and IRR.", example: "The finance team performed Capital Budgeting to select the best of three new expansion projects." },
+
+
     // Financial Statements (15 terms)
     { term: "Balance Sheet", category: "Financial Statements", definition: "A financial statement that reports a company's assets, liabilities, and shareholder equity at a specific point in time.", example: "Company with $500K assets, $200K liabilities has $300K equity." },
     { term: "Income Statement", category: "Financial Statements", definition: "A report showing a company's financial performance over a specific period, detailing revenues, expenses, and net income.", example: "Revenue $1M minus expenses $700K equals net income $300K." },
@@ -389,27 +455,30 @@ const allTerms = [
     { term: "Intercompany Transaction", category: "Corporate Accounting", definition: "Transactions between a parent company and its subsidiary.", example: "Parent company sells inventory to a subsidiary; must be eliminated during consolidation." },
 ];
 
-// 2. GLOBAL VARIABLES AND SETUP
-const uniqueCategories = ['All', ...new Set(allTerms.map(term => term.category))].sort();
-let currentCategory = 'All'; // Default to show all terms
+// 2. GLOBAL VARIABLES
 const searchInput = document.getElementById('search-input');
-const termsOutput = document.getElementById('terms-output');
 const categoryList = document.getElementById('category-list');
+const termsOutput = document.getElementById('terms-output');
 const modal = document.getElementById('term-modal');
 const closeButton = document.querySelector('.close-button');
 
+let currentCategory = 'All'; // Default category
 
-// 3. MAIN RENDER FUNCTION (***THIS IS THE FIX***)
+// Get all unique categories from the data, plus an "All" option
+const uniqueCategories = ['All', ...new Set(allTerms.map(term => term.category))].sort();
+
+
+// 3. MAIN RENDER FUNCTION (***THIS IS THE FIXED FUNCTION***)
 function renderTerms() {
     const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
     let filteredTerms = allTerms;
 
-    // Filter by category
+    // Filter 1: by category
     if (currentCategory && currentCategory !== 'All') {
         filteredTerms = filteredTerms.filter(term => term.category === currentCategory);
     }
 
-    // Filter by search term
+    // Filter 2: by search term
     if (searchTerm) {
         filteredTerms = filteredTerms.filter(term =>
             term.term.toLowerCase().includes(searchTerm) ||
@@ -418,9 +487,9 @@ function renderTerms() {
         );
     }
 
-    // Generate HTML for each term
+    // 3. GENERATE THE HTML FOR EACH TERM
     const termsHtml = filteredTerms.map(term => {
-        // ✅ FIX: The full HTML card is returned here, including the definition.
+        // ✅ FIX APPLIED: The HTML structure now correctly includes the 'term-brief' with the definition.
         return `
             <div class="term-card" data-term="${term.term}">
                 <h3 class="term-title">${term.term}</h3>
@@ -430,9 +499,10 @@ function renderTerms() {
         `;
     }).join('');
 
-    // Update the main content inner HTML
+    // 4. Update the main content inner HTML
     if (termsOutput) {
         if (termsHtml.length === 0) {
+            // No results message
             termsOutput.innerHTML = `
                 <div class="no-results">
                     <h2>No Terms Found</h2>
@@ -445,13 +515,15 @@ function renderTerms() {
     }
 }
 
+
 // 4. CATEGORY RENDER & EVENT LISTENERS
 function renderCategories() {
     if (!categoryList) return; 
 
+    // Generate HTML for all category buttons
     categoryList.innerHTML = uniqueCategories.map(category => {
         const isActive = category === currentCategory ? 'active' : '';
-        // Count terms for the category
+        // Calculate the count of terms for the category
         const count = allTerms.filter(t => category === 'All' || t.category === category).length;
         
         return `
@@ -464,67 +536,67 @@ function renderCategories() {
     }).join('');
 }
 
-// 5. MODAL LOGIC (Shows the full details when 'View Details' is clicked)
-function showTermDetails(termName) {
+
+// 5. MODAL LOGIC
+function showModal(termName) {
     const term = allTerms.find(t => t.term === termName);
-    if (!term || !modal) return;
-
-    document.getElementById('modal-term').textContent = term.term;
-    document.getElementById('modal-definition').textContent = term.definition;
-    document.getElementById('modal-category').textContent = term.category;
-    document.getElementById('modal-example').textContent = term.example || "No specific example provided for this term."; // Handle missing example
-
-    modal.style.display = 'block';
+    if (term) {
+        document.getElementById('modal-term').textContent = term.term;
+        document.getElementById('modal-definition').textContent = term.definition;
+        document.getElementById('modal-example').textContent = term.example || 'No specific example provided.';
+        modal.style.display = 'block';
+    }
 }
 
 function hideModal() {
-    if (modal) {
-        modal.style.display = 'none';
-    }
+    modal.style.display = 'none';
 }
 
 
 // 6. ATTACH EVENT LISTENERS AND INITIAL PAGE LOAD
 document.addEventListener('DOMContentLoaded', () => {
-    // Search input listener
+    
+    // Search Input Listener
     if (searchInput) {
         searchInput.addEventListener('input', renderTerms);
     }
     
-    // Category click listener
+    // Category Filter Listener
     if (categoryList) {
         categoryList.addEventListener('click', (event) => {
             const button = event.target.closest('button');
             if (button) {
                 currentCategory = button.dataset.category;
-                renderCategories(); 
-                renderTerms(); 
+                renderCategories(); // Re-render categories to update active state
+                renderTerms();      // Re-render terms based on new category
             }
         });
     }
 
-    // Term card click listener (for 'View Details' button)
+    // Term Details (Modal) Listener - uses event delegation on the main output area
     if (termsOutput) {
         termsOutput.addEventListener('click', (event) => {
             const button = event.target.closest('.view-details-btn');
             if (button) {
                 const termCard = button.closest('.term-card');
                 const termName = termCard.dataset.term;
-                showTermDetails(termName);
+                showModal(termName);
             }
         });
     }
 
-    // Modal close listeners
+    // Modal Close Button Listener
     if (closeButton) {
         closeButton.addEventListener('click', hideModal);
     }
-    // Close modal when clicking outside of it
+    
+    // Close modal when user clicks outside of it
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
             hideModal();
         }
     });
+
 
     // Initial page load
     renderCategories();
