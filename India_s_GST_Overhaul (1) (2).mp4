@@ -1,5 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Video Page</title>
+    </head>
+<body>
 
-<video controls width="100%">
-  <source src="C:\Users\Asus\Downloads\India_s_GST_Overhaul (1) (2).mp4" type="video/mp4">
-  Sorry, your browser doesn't support embedded videos.
-</video>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tutorials.html">Tutorials</a> 
+        </nav>
+    </header>
+
+    <h1>My Awesome Video Tutorial</h1>
+    
+    <div style="max-width: 800px; margin: 20px auto;">
+       <video controls width="100%" preload="metadata">
+  <source src="India_s_GST_Overhaul.mp4" type="video/mp4"> 
+  
+          
+          <p>Your browser does not support the video tag. Please check your file name!</p>
+        </video>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 My Website</p>
+    </footer>
+
+</body>
+</html>
