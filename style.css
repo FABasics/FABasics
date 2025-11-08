@@ -22,9 +22,10 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
+    flex-direction: row; 
     gap: 20px;
 }
-/* 🏆 NEW SCROLLABLE SIDEBAR STYLE 🏆 */
+/* 🏆 SCROLLABLE SIDEBAR STYLE */
 .sidebar {
     width: 250px;
     background-color: var(--color-background);
@@ -32,60 +33,35 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     padding: 20px;
     max-height: calc(100vh - 40px); /* Sets max height to screen height - padding */
-    overflow-y: auto;               /* Adds the scrollbar when content is too tall */
-    position: sticky;
+    overflow-y: auto; /* Enables vertical scrolling */
+    position: sticky; /* Makes it stick when scrolling the main page */
     top: 20px;
 }
-.main-content {
-    flex-grow: 1;
-    min-width: 0;
-}
-header {
-    background-color: var(--color-background);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-h1 {
+.sidebar h2 {
     color: var(--color-primary);
-    font-size: 2rem;
+    font-size: 1.2rem;
     margin-bottom: 10px;
-}
-.search-container {
-    display: flex;
-    gap: 10px;
-}
-.search-input {
-    flex-grow: 1;
-    padding: 12px 15px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 1rem;
-    outline: none;
-}
-.search-input:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.2);
+    border-bottom: 2px solid var(--color-light);
+    padding-bottom: 5px;
 }
 .category-list {
     list-style: none;
-    padding-top: 10px;
+    margin-bottom: 25px;
 }
-.category-item a {
-    text-decoration: none;
-}
-.category-item button {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 10px 15px;
+.category-item {
     margin-bottom: 5px;
+}
+.category-item button,
+.category-item a button {
+    width: 100%;
+    padding: 10px 15px;
     border: none;
-    background: none;
-    border-radius: 6px;
+    background-color: transparent;
     color: var(--color-text);
+    text-align: left;
     cursor: pointer;
+    border-radius: 8px;
+    font-size: 0.9rem;
     transition: background-color 0.2s, color 0.2s;
     font-weight: 500;
 }
@@ -94,98 +70,115 @@ h1 {
 }
 .category-item button.active {
     background-color: var(--color-primary);
-    color: white;
-    font-weight: 700;
-}
-.terms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-/* Updated term-card for click-to-open */
-.term-card {
-    background-color: var(--color-background);
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-left: 5px solid var(--color-primary);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer; /* Makes it look clickable */
-}
-.term-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-}
-.term-card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    color: var(--color-primary);
-}
-.term-card .category-tag {
-    display: inline-block;
-    font-size: 0.75rem;
+    color: var(--color-background);
     font-weight: 600;
-    padding: 3px 8px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    color: white;
-    background-color: var(--color-secondary);
-}
-/* Hide definitions in the main grid view */
-.term-card p, .term-card strong, .term-card .example {
-    display: none;
 }
 
-.empty-state {
-    text-align: center;
-    padding: 50px;
+.main-content {
+    flex-grow: 1;
     background-color: var(--color-background);
     border-radius: 12px;
-    margin-top: 20px;
-    color: #94a3b8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 30px;
 }
-.empty-state h3 {
-    font-size: 1.5rem;
+header h1 {
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+header p {
+    color: #64748b; /* Slate-500 */
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+.search-container {
+    margin-bottom: 30px;
+}
+.search-input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #cbd5e1; /* Slate-300 */
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+/* Term Grid and Cards */
+.terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.term-card {
+    background-color: var(--color-light);
+    border-radius: 10px;
+    padding: 20px;
+    border-left: 5px solid var(--color-secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+.term-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.term-title {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+}
+.term-brief {
+    /* 💥 THIS IS THE KEY ELEMENT YOU WERE MISSING 💥 */
+    color: var(--color-text);
+    font-size: 0.95rem;
+    flex-grow: 1; /* Pushes the button to the bottom */
+    margin-bottom: 15px;
+}
+.view-details-btn {
+    align-self: flex-start; /* Aligns button to the left */
+    padding: 8px 15px;
+    border: none;
+    background-color: var(--color-secondary);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+.view-details-btn:hover {
+    background-color: #047857; /* Darker Emerald */
+}
+
+/* No Results State */
+.no-results {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: var(--color-light);
+    border-radius: 10px;
+    border: 1px dashed #94a3b8; /* Slate-400 */
+}
+.no-results h2 {
+    color: var(--color-primary);
     margin-bottom: 10px;
 }
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        position: static;
-        margin-bottom: 20px;
-        max-height: none; /* Reset max-height on mobile */
-        overflow-y: visible; /* Reset scrolling on mobile */
-    }
-    .category-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-        padding-top: 0;
-    }
-    .category-item {
-        flex: 1 1 auto;
-        min-width: 120px;
-    }
-    .category-item button {
-        text-align: center;
-        margin-bottom: 0;
-    }
-}
 
 
-/* --- CSS for the Definition Modal (Popup) --- */
+/* Modal Styles */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top of everything */
+    z-index: 1000; /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
     background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
     padding-top: 60px;
 }
@@ -196,7 +189,7 @@ h1 {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 90%; 
     max-width: 600px;
     animation: slideIn 0.3s ease-out;
 }
@@ -230,30 +223,48 @@ h1 {
 
 #modal-term {
     color: var(--color-primary);
-    font-size: 2rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--color-light);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-body h3 {
+    color: var(--color-secondary);
+    font-size: 1.1rem;
+    margin-top: 15px;
     margin-bottom: 5px;
 }
 
-.category-tag-modal {
-    display: inline-block;
-    font-size: 0.9rem;
-    font-weight: 600;
-    padding: 5px 10px;
-    margin-bottom: 20px;
-    border-radius: 6px;
-    color: white;
-    background-color: var(--color-secondary);
+.modal-body p {
+    margin-bottom: 10px;
+    padding-left: 15px;
 }
 
-.modal-definition, .modal-example {
-    margin-bottom: 20px;
-}
-
-.modal-definition p, .modal-example p {
-    font-size: 1rem;
-    margin-top: 5px;
-}
-
-.modal-example strong {
-    color: #4b5563; /* Slate-600 */
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stacks sidebar and main content vertically */
+        padding: 10px;
+    }
+    .sidebar {
+        width: 100%;
+        max-height: initial; /* Remove fixed height on small screens */
+        position: relative;
+        top: 0;
+    }
+    .category-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+    .category-item {
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
+    .category-item button {
+        text-align: center;
+        margin-bottom: 0;
+    }
 }
