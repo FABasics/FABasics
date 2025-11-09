@@ -4,55 +4,281 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Accounting Finance Dictionary</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        .container { display: flex; flex-wrap: wrap; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        
+        .container { display: flex; flex-wrap: wrap; min-height: 100vh; }
+        
+        /* Sidebar */
         .sidebar {
-            min-width: 220px; padding: 20px;
-            background: #f7f7f7; border-right: 2px solid #ececec;
+            min-width: 250px; 
+            width: 250px;
+            padding: 20px;
+            background: #2c3e50; 
+            color: white;
         }
-        .main-content { flex: 1; padding: 20px; }
-        header h1 { margin-bottom: 0; }
-        header p { margin-top: 6px; color: #555;}
+        .sidebar h2 { margin-bottom: 20px; font-size: 1.3em; }
+        .sidebar ul { list-style: none; }
+        .sidebar li { margin-bottom: 10px; }
+        .sidebar button {
+            width: 100%;
+            padding: 12px;
+            background: #34495e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: background 0.3s;
+        }
+        .sidebar button:hover { background: #1abc9c; }
+        
+        /* Category filters */
+        #category-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+        .category-item { list-style: none; }
+        .category-item button {
+            padding: 8px 16px;
+            background: #ecf0f1;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        .category-item button:hover { background: #bdc3c7; }
+        .category-item button.active {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+        
+        /* Main content */
+        .main-content { 
+            flex: 1; 
+            padding: 30px;
+            min-width: 300px;
+        }
+        
+        header { margin-bottom: 30px; }
+        header h1 { 
+            font-size: 2.5em; 
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        header p { 
+            color: #7f8c8d; 
+            font-size: 1.1em;
+        }
+        
+        /* Search */
+        .search-container { 
+            margin-bottom: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .search-input { 
+            padding: 12px 15px; 
+            font-size: 1em; 
+            width: 100%; 
+            max-width: 500px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        /* Terms grid */
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .term-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .term-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .term-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .term-brief {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .view-details-btn {
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+        .view-details-btn:hover { background: #2980b9; }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            position: relative;
+            animation: slideDown 0.3s;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #7f8c8d;
+            transition: color 0.3s;
+        }
+        .close-button:hover { color: #e74c3c; }
+        
+        #modal-term {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #3498db;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        #modal-definition, #modal-example {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 8px;
+        }
+        .no-results h2 {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        /* Video section */
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 8px;
+        }
+        .video-responsive video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
         /* Tabs */
-        .tab-container { display: flex; margin-bottom: 10px; border-bottom: 1px solid #ddd; }
-        .tab-btn {
-            background: none; outline: none;
-            border: none; font-size: 1em;
-            padding: 10px 18px; cursor: pointer;
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            background: white;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
         }
+        .tab-btn {
+            background: white;
+            border: none;
+            font-size: 1em;
+            padding: 15px 25px;
+            cursor: pointer;
+            color: #7f8c8d;
+            transition: all 0.3s;
+        }
+        .tab-btn:hover { background: #ecf0f1; }
         .tab-btn.active {
-            border-bottom: 2px solid #007bff;
-            color: #007bff; font-weight: bold;
-            background: #fff;
+            color: #3498db;
+            font-weight: bold;
+            background: #ecf0f1;
+            border-bottom: 3px solid #3498db;
         }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        /* Search */
-        .search-container { margin-bottom: 15px; }
-        .search-input { padding: 5px 10px; font-size: 1em; width: 100%; max-width: 400px;}
-        /* Terms output */
-        #terms-output { margin: 20px 0; }
-        .term-item { border-bottom: 1px solid #eee; padding: 10px 0;}
-        .term-title { font-weight: bold; cursor: pointer; color: #007bff; margin-bottom: 4px;}
-        .term-desc { color: #444; margin-left: 12px;}
-        /* Modal */
-        .modal {
-            display: none; position: fixed; z-index: 9; left: 0; top: 0; width: 100%; height: 100%;
-            overflow: auto; background: rgba(0,0,0,0.6);
-        }
-        .modal-content {
-            background: #fff; margin: 10% auto; padding: 22px 18px; border-radius: 6px; max-width: 480px; position: relative;
-        }
-        .close-button {
-            position: absolute; top: 8px; right: 10px; font-size: 1.5em; cursor: pointer;
-        }
-        /* Responsive video */
-        .video-responsive {
-            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
-        }
-        .video-responsive video {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                min-width: 100%;
+            }
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 { font-size: 1.8em; }
         }
     </style>
 </head>
@@ -62,12 +288,11 @@
         <div class="sidebar">
             <h2>Navigation</h2>
             <ul>
-                <li><a href="#" onclick="openTabByName('terms')"><button>Browse All Terms</button></a></li>
-                <li><a href="#" onclick="openTabByName('video-tutorial')"><button>Video Tutorial</button></a></li>
-                <li><a href="faqs.html"><button>Frequently Asked Questions</button></a></li>
-                <li><a href="about.html"><button>About This Project</button></a></li>
+                <li><button onclick="openTabByName('terms')">Browse All Terms</button></li>
+                <li><button onclick="openTabByName('video-tutorial')">Video Tutorial</button></li>
             </ul>
         </div>
+        
         <div class="main-content">
             <header>
                 <h1>Accounting Finance Dictionary</h1>
@@ -83,26 +308,33 @@
             <!-- Tab: Terms -->
             <div id="terms" class="tab-content active">
                 <div class="search-container">
-                    <input type="text" id="search-input" class="search-input" placeholder="Search terms..." onkeyup="searchTerms()">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search terms by name, definition, or example...">
                 </div>
-                <main id="terms-output"></main>
+                
+                <!-- Category filters -->
+                <ul id="category-list"></ul>
+                
+                <!-- Terms output -->
+                <div id="terms-output"></div>
             </div>
+            
             <!-- Tab: Video -->
             <div id="video-tutorial" class="tab-content">
-                <h3>Video Tutorial: India's GST Overhaul</h3>
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">Video Tutorial: India's GST Overhaul</h3>
                 <div class="video-responsive">
                     <video controls preload="metadata">
                         <source src="assets/IndiasGSTOverhaul.mp4" type="video/mp4">
-                        Your browser does not support the video tag. Please check the file path and name.
+                        <p style="color: white; padding: 20px;">Your browser does not support the video tag. Please check the file path and name.</p>
                     </video>
                 </div>
             </div>
         </div>
     </div>
+    
     <!-- Modal for Term Details -->
     <div id="term-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
+            <span class="close-button">&times;</span>
             <h2 id="modal-term"></h2>
             <p class="section-title">Definition</p>
             <p id="modal-definition"></p>
@@ -111,96 +343,6 @@
         </div>
     </div>
 
-    <script>
-    // Sample terms data (replace with your full JSON or array)
-    const termsData = [
-        { title: "Balance Sheet", definition: "A financial statement...", example: "A company's assets..." },
-        { title: "NPV", definition: "Net Present Value is...", example: "In investment analysis..." },
-        { title: "Treasury Stock", definition: "Shares bought back...", example: "After buyback the shares..." }
-        // Add all terms here...
-    ];
-
-    // Show all terms initially
-    function showTerms(termsList) {
-        const output = document.getElementById("terms-output");
-        output.innerHTML = "";
-        if (!termsList.length) {
-            output.innerHTML = "<p>No terms found.</p>";
-            return;
-        }
-        termsList.forEach(term => {
-            const item = document.createElement('div');
-            item.className = "term-item";
-            item.innerHTML = `
-                <div class="term-title" onclick="showModal('${term.title}')">${term.title}</div>
-                <div class="term-desc">${term.definition}</div>
-            `;
-            output.appendChild(item);
-        });
-    }
-
-    // Search terms function
-    function searchTerms() {
-        const query = document.getElementById("search-input").value.toLowerCase();
-        const filtered = termsData.filter(term =>
-            term.title.toLowerCase().includes(query) ||
-            term.definition.toLowerCase().includes(query)
-        );
-        showTerms(filtered);
-    }
-
-    // Modal functionality
-    function showModal(title) {
-        const data = termsData.find(t => t.title === title);
-        if (!data) return;
-        document.getElementById("modal-term").textContent = data.title;
-        document.getElementById("modal-definition").textContent = data.definition;
-        document.getElementById("modal-example").textContent = data.example;
-        document.getElementById("term-modal").style.display = 'block';
-    }
-    function closeModal() {
-        document.getElementById("term-modal").style.display = 'none';
-    }
-    window.onclick = function(event) {
-        const modal = document.getElementById("term-modal");
-        if (event.target === modal) closeModal();
-    }
-
-    // Tabs logic
-    function openTab(evt, tabName) {
-        var i, tabContent, tabBtn;
-        tabContent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabContent.length; i++) {
-            tabContent[i].classList.remove("active");
-        }
-        tabBtn = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tabBtn.length; i++) {
-            tabBtn[i].classList.remove("active");
-        }
-        document.getElementById(tabName).classList.add("active");
-        evt.currentTarget.classList.add("active");
-    }
-    // Enable tab switch from sidebar
-    function openTabByName(tabName) {
-        var tabBtn, tabContent;
-        tabContent = document.getElementsByClassName("tab-content");
-        tabBtn = document.getElementsByClassName("tab-btn");
-        for (let i = 0; i < tabContent.length; i++) {
-            tabContent[i].classList.remove("active");
-        }
-        for (let i = 0; i < tabBtn.length; i++) {
-            tabBtn[i].classList.remove("active");
-            if (tabBtn[i].textContent.trim().toLowerCase() === tabName.replace('-', ' ')) {
-                tabBtn[i].classList.add("active");
-            }
-        }
-        document.getElementById(tabName).classList.add("active");
-    }
-
-    // On page load, show all terms
-    document.addEventListener('DOMContentLoaded', function() {
-        showTerms(termsData);
-    });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
