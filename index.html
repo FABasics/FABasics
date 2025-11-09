@@ -3,62 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Accounting & Finance Dictionary</title>
-    
-    <link rel="stylesheet" href="style.css"> 
+    <title>Complete Accounting Finance Dictionary</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Tab styles */
+        .tab-container {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+        }
+        .tab-btn {
+            background: #f4f4f4;
+            border: none;
+            outline: none;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .tab-btn.active {
+            background: #ffffff;
+            border-bottom: 2px solid #007bff;
+            color: #007bff;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        /* Responsive video */
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            padding-top: 25px;
+            height: 0;
+        }
+        .video-responsive video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <!-- Navigation Sidebar -->
+        <div class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="index.html"><button>Browse All Terms</button></a></li>
+                <li><a href="faqs.html"><button>Frequently Asked Questions</button></a></li>
+                <li><a href="about.html"><button>About This Project</button></a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <header>
+                <h1>Accounting Finance Dictionary</h1>
+                <p>329 essential terms for students, founders, and professionals.</p>
+            </header>
 
-<div class="container"> 
-    
-    <div class="sidebar">
-        <h2>Navigation</h2>
-        <ul class="category-list" id="navigation-list">
-            <li class="category-item"><a href="index.html"><button class="active">📚 Browse All Terms</button></a></li>
-            <li class="category-item"><a href="faqs.html"><button>❓ Frequently Asked Questions</button></a></li>
-            <li class="category-item"><a href="about.html"><button>💡 About This Project</button></a></li>
-        </ul>
-        
-        <h2>Categories</h2>
-        <ul class="category-list" id="category-list">
-        </ul>
-    </div>
-    
-    <div class="main-content"> 
-        <header>
-            <h1>Accounting & Finance Dictionary</h1>
-            <p>329 essential terms for students, founders, and professionals.</p>
-            <div class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Search for 'Balance Sheet', 'NPV', or 'Treasury Stock'...">
+            <!-- Tabs -->
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="openTab(event, 'terms')">Terms</button>
+                <button class="tab-btn" onclick="openTab(event, 'video-tutorial')">Video Tutorial</button>
             </div>
-        </header>
 
-        <main id="terms-output">
-            <div class="video-container">
+            <!-- Tab Contents -->
+            <div id="terms" class="tab-content active">
+                <!-- (Your terms content goes here) -->
+                <div class="search-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search for Balance Sheet, NPV, or Treasury Stock...">
+                </div>
+                <main id="terms-output"></main>
+            </div>
+            <div id="video-tutorial" class="tab-content">
                 <h3>Video Tutorial: India's GST Overhaul</h3>
-                <video controls width="100%" preload="metadata">
-                  <source src="assets/India_s_GST_Overhaul (1) (2).mp4" type="video/mp4"> 
-                  
-                  <p>Your browser does not support the video tag. Please check the file path and name.</p>
-                </video>
+                <div class="video-responsive">
+                    <video controls preload="metadata">
+                        <!-- Ensure the file exists at the below location -->
+                        <source src="assets/IndiasGSTOverhaul.mp4" type="video/mp4">
+                        Your browser does not support the video tag. Please check the file path and name.
+                    </video>
+                </div>
             </div>
-        </main>
-    </div> 
-    
-</div> 
-
-<div id="term-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2 id="modal-term"></h2>
-        <p class="section-title">Definition</p>
-        <p id="modal-definition"></p>
-        
-        <p class="section-title">Example</p>
-        <p id="modal-example"></p>
+        </div>
     </div>
-</div>
 
+    <script>
+        // Tab switcher JavaScript
+        function openTab(evt, tabName) {
+            var i, tabContent, tabBtn;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            tabBtn = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabBtn.length; i++) {
+                tabBtn[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
 </body>
 </html>
