@@ -421,122 +421,133 @@ const allTerms = [
     { term: "Activity-Based Budgeting", category: "Budgeting & Planning", definition: "Budgeting based on activities and their resource requirements.", example: "Budget based on expected production runs, setups, and inspections." }
 ];
 
-// 2. STATE AND INITIALIZATION
+// =================================================================
+// STATE AND UTILITIES
+// =================================================================
 let currentCategory = 'All';
+const termsOutput = document.getElementById('terms-output');
+const searchInput = document.getElementById('search-input');
+const categoryList = document.getElementById('category-list');
+const noResultsMessage = document.getElementById('no-results');
 
-// 3. MAIN RENDER FUNCTION
-function renderTerms() {
-    const searchInput = document.getElementById('search-input');
-    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+function getUniqueCategories() {
+    // Collects all unique categories from the full data set
+    const categories = new Set(allTerms.map(term => term.category).filter(c => c));
+    return Array.from(categories).sort();
+}
+
+// 1. RENDER CATEGORIES
+function renderCategories() {
+    const categories = getUniqueCategories();
+    categoryList.innerHTML = '';
+    
+    // Add "All Categories" button first
+    const allLi = document.createElement('li');
+    allLi.className = 'category-item';
+    const allButton = document.createElement('button');
+    allButton.className = 'all-category-btn category-filter-btn active';
+    allButton.textContent = 'All Categories';
+    allButton.setAttribute('data-category', 'All');
+    allLi.appendChild(allButton);
+    categoryList.appendChild(allLi);
+
+    categories.forEach(category => {
+        const li = document.createElement('li');
+        li.className = 'category-item';
+        
+        const button = document.createElement('button');
+        button.className = 'category-filter-btn';
+        button.textContent = category;
+        button.setAttribute('data-category', category);
+        
+        li.appendChild(button);
+        categoryList.appendChild(li);
+    });
+}
+
+// 2. RENDER TERMS
+function renderTerms(filter = '', category = 'All') {
     let filteredTerms = allTerms;
-
-    // Filter by category
-    if (currentCategory && currentCategory !== 'All') {
-        filteredTerms = filteredTerms.filter(term => term.category === currentCategory);
+    
+    // 1. Filter by Category
+    if (category !== 'All') {
+        filteredTerms = filteredTerms.filter(term => term.category === category);
     }
-
-    // Filter by search term
-    if (searchTerm) {
-        filteredTerms = filteredTerms.filter(term =>
-            term.term.toLowerCase().includes(searchTerm) ||
-            term.definition.toLowerCase().includes(searchTerm) ||
-            (term.example && term.example.toLowerCase().includes(searchTerm))
+    
+    // 2. Filter by Search (Case-insensitive match across term, definition, and example)
+    if (filter) {
+        const lowerFilter = filter.toLowerCase();
+        filteredTerms = filteredTerms.filter(term => 
+            term.term.toLowerCase().includes(lowerFilter) || 
+            term.definition.toLowerCase().includes(lowerFilter) ||
+            (term.example && term.example.toLowerCase().includes(lowerFilter)) ||
+            term.category.toLowerCase().includes(lowerFilter)
         );
     }
-
-    // Generate HTML
-    const termsHtml = filteredTerms.map(term => {
-        return `
-            <div class="term-card" data-term="${term.term}">
-                <h3 class="term-title">${term.term}</h3>
-                <p class="term-brief">${term.definition}</p> 
-                <button class="view-details-btn">View Details</button>
-            </div>
-        `;
-    }).join('');
-
-    const termsOutput = document.getElementById('terms-output');
-    if (termsOutput) {
-        if (filteredTerms.length === 0) {
-            termsOutput.innerHTML = `
-                <div class="no-results">
-                    <h2>No Terms Found</h2>
-                    <p>Try broadening your search or selecting a different category.</p>
-                </div>
-            `;
-        } else {
-            termsOutput.innerHTML = `<div class="terms-grid">${termsHtml}</div>`;
-        }
-    }
-}
-
-// 4. CATEGORY GENERATION
-function renderCategories() {
-    const categories = ['All', ...new Set(allTerms.map(term => term.category))];
-    const categoryButtons = categories.map(category => {
-        const isActive = category === currentCategory ? 'active' : '';
-        return `
-            <li class="category-item">
-                <button class="${isActive}" data-category="${category}">
-                    ${category}
-                </button>
-            </li>
-        `;
-    }).join('');
     
-    const categoryList = document.getElementById('category-list');
-    if (categoryList) {
-        categoryList.innerHTML = categoryButtons;
-    }
-}
+    // 3. Display Results
+    termsOutput.innerHTML = '';
+    
+    if (filteredTerms.length === 0) {
+        noResultsMessage.style.display = 'block';
+    } else {
+        noResultsMessage.style.display = 'none';
+        
+        filteredTerms.forEach(term => {
+            const card = document.createElement('div');
+            card.className = 'term-card';
+            card.setAttribute('data-term', term.term);
 
-// 5. EVENT LISTENERS
-function attachEventListeners() {
-    const categoryList = document.getElementById('category-list');
-    const searchInput = document.getElementById('search-input');
-    const termsOutput = document.getElementById('terms-output');
+            const termTitle = document.createElement('h3');
+            termTitle.className = 'term-title';
+            termTitle.textContent = term.term;
 
-    // Category filter buttons
-    if (categoryList) {
-        categoryList.addEventListener('click', (e) => {
-            if (e.target.tagName === 'BUTTON') {
-                currentCategory = e.target.dataset.category;
-                renderCategories();
-                renderTerms();
-            }
-        });
-    }
+            // This snippet uses CSS line-clamp (in style.css) to show the brief definition
+            const snippet = document.createElement('p');
+            snippet.className = 'term-brief';
+            snippet.textContent = term.definition; 
 
-    // Search input
-    if (searchInput) {
-        searchInput.addEventListener('input', renderTerms);
-    }
-
-    // View Details buttons
-    if (termsOutput) {
-        termsOutput.addEventListener('click', (e) => {
-            if (e.target.classList.contains('view-details-btn')) {
-                const termCard = e.target.closest('.term-card');
-                const termName = termCard.dataset.term;
-                const termData = allTerms.find(t => t.term === termName);
-                
+            const detailsBtn = document.createElement('button');
+            detailsBtn.className = 'view-details-btn';
+            detailsBtn.textContent = 'View Details';
+            
+            // Event listener to open modal when button is clicked
+            detailsBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card click event from firing twice
+                const termData = allTerms.find(t => t.term === term.term);
                 if (termData) {
                     openModal(termData);
                 }
-            }
+            });
+            
+            // Event listener to open modal when card is clicked
+            card.addEventListener('click', () => {
+                const termData = allTerms.find(t => t.term === term.term);
+                if (termData) {
+                    openModal(termData);
+                }
+            });
+
+            card.appendChild(termTitle);
+            card.appendChild(snippet);
+            card.appendChild(detailsBtn);
+            termsOutput.appendChild(card);
         });
     }
 }
 
-// 6. MODAL FUNCTIONS
+// 3. MODAL FUNCTIONS (Fixes definitions not fully showing)
 function openModal(termData) {
     const modal = document.getElementById('term-modal');
     const modalTerm = document.getElementById('modal-term');
+    const modalCategory = document.getElementById('modal-category');
     const modalDefinition = document.getElementById('modal-definition');
     const modalExample = document.getElementById('modal-example');
     
     if (modal && modalTerm && modalDefinition && modalExample) {
         modalTerm.textContent = termData.term;
+        modalCategory.textContent = termData.category;
+        // FIX: The entire definition is put into the modal for full viewing
         modalDefinition.textContent = termData.definition;
         modalExample.textContent = termData.example || 'No example available.';
         modal.style.display = 'block';
@@ -550,24 +561,111 @@ function closeModal() {
     }
 }
 
-// Close modal when clicking X
-const closeButton = document.querySelector('.close-button');
-if (closeButton) {
-    closeButton.addEventListener('click', closeModal);
+
+// 4. TAB LOGIC (Must be globally accessible since HTML uses onclick)
+// This function handles the main tab buttons
+function openTab(evt, tabName) {
+    // Deactivate all tab content
+    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+    
+    // Deactivate all main tab buttons
+    document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+    
+    // Deactivate all sidebar nav buttons
+    document.querySelectorAll(".sidebar button").forEach(el => el.classList.remove("active-nav"));
+
+    // Activate selected tab content and button
+    document.getElementById(tabName).classList.add("active");
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add("active");
+    }
+
+    // Update corresponding sidebar button state
+    const sidebarBtnId = (tabName === 'terms' ? 'nav-terms-btn' : 'nav-video-btn');
+    const sidebarButton = document.getElementById(sidebarBtnId);
+    if (sidebarButton) {
+        sidebarButton.classList.add("active-nav");
+    }
 }
 
-// Close modal when clicking outside
-window.addEventListener('click', (e) => {
-    const modal = document.getElementById('term-modal');
-    if (e.target === modal) {
-        closeModal();
+// Function to switch tab from sidebar
+function openTabByName(tabName, clickedButton) {
+    // 1. Deactivate all sidebar buttons
+    document.querySelectorAll(".sidebar button").forEach(el => el.classList.remove("active-nav"));
+    // 2. Activate the clicked sidebar button
+    clickedButton.classList.add("active-nav");
+
+    // 3. Deactivate all tab content and main tab buttons
+    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+    
+    // 4. Activate the selected tab content
+    document.getElementById(tabName).classList.add("active");
+
+    // 5. Activate the corresponding main tab button (for mobile view consistency)
+    const mainTabButton = Array.from(document.querySelectorAll(".tab-btn")).find(btn => 
+        btn.textContent.trim().toLowerCase().includes(tabName.replace('-', ' '))
+    );
+    if (mainTabButton) {
+        mainTabButton.classList.add("active");
     }
+}
+
+// Ensure openTab and openTabByName are available globally (Crucial for HTML onclick to work)
+window.openTab = openTab;
+window.openTabByName = openTabByName;
+window.closeModal = closeModal; // Ensure closeModal is also globally accessible for the 'x' button
+
+
+// 5. INITIALIZATION AND EVENT LISTENERS
+document.addEventListener('DOMContentLoaded', () => {
+    // Set initial active state for the sidebar and main tab
+    const initialSidebarBtn = document.getElementById('nav-terms-btn');
+    if (initialSidebarBtn) initialSidebarBtn.classList.add('active-nav');
+    
+    // Set the total term count (now 329 based on the structure provided)
+    const termCountElement = document.getElementById('term-count');
+    if (termCountElement) {
+        termCountElement.textContent = allTerms.length;
+    }
+
+    // 1. Render categories and terms
+    renderCategories();
+    renderTerms('','All');
+
+    // 2. Attach Category Filtering Listener
+    categoryList.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.matches('.category-filter-btn')) {
+            const category = target.getAttribute('data-category');
+            currentCategory = category;
+            searchInput.value = ''; // Clear search when selecting category
+            
+            // Update active state
+            document.querySelectorAll('.category-filter-btn').forEach(btn => btn.classList.remove('active'));
+            target.classList.add('active');
+            
+            renderTerms('', category);
+        }
+    });
+
+    // 3. Attach Search Listener
+    searchInput.addEventListener('input', (e) => {
+        // Clear category selection when searching
+        currentCategory = 'All';
+        document.querySelectorAll('.category-filter-btn').forEach(btn => btn.classList.remove('active'));
+        const allCategoryBtn = document.querySelector('.all-category-btn');
+        if(allCategoryBtn) allCategoryBtn.classList.add('active');
+        
+        renderTerms(e.target.value, 'All');
+    });
+
+    // 4. Modal Close Listeners (The 'x' button is handled by global closeModal)
+    window.addEventListener('click', (e) => {
+        const modal = document.getElementById('term-modal');
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
 });
 
-// 7. INITIALIZE ON PAGE LOAD
-document.addEventListener('DOMContentLoaded', () => {
-    console.log(`Loaded ${allTerms.length} accounting and finance terms`);
-    renderCategories();
-    renderTerms();
-    attachEventListeners();
-});
