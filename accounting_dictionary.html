@@ -1,0 +1,273 @@
+// =================================================================
+// DICTIONARY DATA (Truncated for brevity, full list in the application)
+// =================================================================
+const allTerms = [
+    // ========== FINANCIAL STATEMENTS (25 terms) ==========
+    { term: "Balance Sheet", category: "Financial Statements", definition: "A financial statement that reports a company's assets, liabilities, and shareholders' equity at a specific point in time.", example: "A company with $500K in assets and $200K in liabilities has $300K in equity." },
+    { term: "Income Statement", category: "Financial Statements", definition: "A financial statement that shows a company's revenues, expenses, and resulting net income or loss over a period of time.", example: "Revenue of $1M minus expenses of $700K equals a net income of $300K." },
+    { term: "Cash Flow Statement", category: "Financial Statements", definition: "A financial statement that summarizes the amount of cash and cash equivalents entering and leaving a company, grouped by operations, investing, and financing activities.", example: "The statement shows $100K from operations, -$50K from investing, and $20K from financing." },
+    { term: "Retained Earnings", category: "Financial Statements", definition: "The cumulative net income of a company since its inception, less total dividends paid out to shareholders.", example: "Starting retained earnings of $200K plus $50K net income minus $10K dividends results in $240K retained earnings." },
+    { term: "Asset", category: "Financial Statements", definition: "A resource controlled by the company as a result of past events and from which future economic benefits are expected to flow to the entity.", example: "Cash, equipment, and accounts receivable are all considered assets." },
+    { term: "Liability", category: "Financial Statements", definition: "A present obligation of the company arising from past events, the settlement of which is expected to result in an outflow of resources.", example: "Accounts payable, salaries payable, and loans are common liabilities." },
+    { term: "Equity", category: "Financial Statements", definition: "The residual interest in the assets of the company after deducting all its liabilities.", example: "Common stock, preferred stock, and retained earnings make up the equity section." },
+    
+    // ========== FINANCIAL ANALYSIS (15 terms) ==========
+    { term: "Working Capital", category: "Financial Analysis", definition: "The difference between a company's current assets and its current liabilities. It measures short-term liquidity.", example: "If current assets are $150K and current liabilities are $50K, working capital is $100K." },
+    { term: "Current Ratio", category: "Financial Analysis", definition: "A liquidity ratio that measures a company's ability to pay short-term obligations (Current Assets / Current Liabilities).", example: "A Current Ratio of 2.0 means the company has twice as many current assets as liabilities." },
+    { term: "Debt-to-Equity Ratio", category: "Financial Analysis", definition: "A solvency ratio that indicates how much debt a company is using to finance its assets relative to the value of shareholders' equity.", example: "A D/E ratio of 0.5 suggests the company uses half as much debt as equity." },
+    
+    // ========== ACCOUNTING CONCEPTS (10 terms) ==========
+    { term: "Amortization", category: "Accounting Concepts", definition: "The systematic write-off of an intangible asset's cost over its useful life.", example: "A company amortizes the cost of a patent over 15 years." },
+    { term: "Depreciation", category: "Accounting Concepts", definition: "The accounting method used to allocate the cost of a tangible asset over its useful life.", example: "A piece of machinery costing $100K is depreciated by $10K per year for ten years." },
+    { term: "Accrual Basis", category: "Accounting Concepts", definition: "An accounting method where revenue or expenses are recorded when a transaction occurs rather than when payment is received or made.", example: "Recording a sale on credit before receiving cash is an example of accrual basis accounting." },
+    
+    // ========== CORPORATE FINANCE (10 terms) ==========
+    { term: "Net Present Value (NPV)", category: "Corporate Finance", definition: "The difference between the present value of cash inflows and the present value of cash outflows over a period of time. Used to evaluate investment profitability.", example: "An investment with a positive NPV is generally considered financially attractive." },
+    { term: "Cost of Capital", category: "Corporate Finance", definition: "The required rate of return that a company must earn on its existing asset base to maintain the current value of its securities.", example: "The weighted average cost of capital (WACC) is often used as the discount rate for NPV calculations." },
+];
+
+// =================================================================
+// STATE AND UTILITIES
+// =================================================================
+let currentCategory = 'All';
+const termsOutput = document.getElementById('terms-output');
+const searchInput = document.getElementById('search-input');
+const categoryList = document.getElementById('category-list');
+const noResultsMessage = document.getElementById('no-results');
+
+function getUniqueCategories() {
+    const categories = new Set(allTerms.map(term => term.category).filter(c => c));
+    return Array.from(categories).sort();
+}
+
+// 1. RENDER CATEGORIES
+function renderCategories() {
+    const categories = getUniqueCategories();
+    categoryList.innerHTML = '';
+    
+    // Add "All Categories" button first
+    const allLi = document.createElement('li');
+    allLi.className = 'category-item';
+    const allButton = document.createElement('button');
+    allButton.className = 'all-category-btn category-filter-btn active';
+    allButton.textContent = 'All Categories';
+    allButton.setAttribute('data-category', 'All');
+    allLi.appendChild(allButton);
+    categoryList.appendChild(allLi);
+
+    categories.forEach(category => {
+        const li = document.createElement('li');
+        li.className = 'category-item';
+        
+        const button = document.createElement('button');
+        button.className = 'category-filter-btn';
+        button.textContent = category;
+        button.setAttribute('data-category', category);
+        
+        li.appendChild(button);
+        categoryList.appendChild(li);
+    });
+}
+
+// 2. RENDER TERMS
+function renderTerms(filter = '', category = 'All') {
+    let filteredTerms = allTerms;
+    
+    // 1. Filter by Category
+    if (category !== 'All') {
+        filteredTerms = filteredTerms.filter(term => term.category === category);
+    }
+    
+    // 2. Filter by Search (Case-insensitive match)
+    if (filter) {
+        const lowerFilter = filter.toLowerCase();
+        filteredTerms = filteredTerms.filter(term => 
+            term.term.toLowerCase().includes(lowerFilter) || 
+            term.definition.toLowerCase().includes(lowerFilter) ||
+            (term.example && term.example.toLowerCase().includes(lowerFilter)) ||
+            term.category.toLowerCase().includes(lowerFilter)
+        );
+    }
+    
+    // 3. Display Results
+    termsOutput.innerHTML = '';
+    
+    if (filteredTerms.length === 0) {
+        noResultsMessage.style.display = 'block';
+    } else {
+        noResultsMessage.style.display = 'none';
+        
+        filteredTerms.forEach(term => {
+            const card = document.createElement('div');
+            card.className = 'term-card';
+            card.setAttribute('data-term', term.term);
+
+            const termTitle = document.createElement('h3');
+            termTitle.className = 'term-title';
+            termTitle.textContent = term.term;
+
+            const snippet = document.createElement('p');
+            snippet.className = 'term-brief';
+            snippet.textContent = term.definition;
+
+            const detailsBtn = document.createElement('button');
+            detailsBtn.className = 'view-details-btn';
+            detailsBtn.textContent = 'View Details';
+            
+            detailsBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                const termData = allTerms.find(t => t.term === term.term);
+                if (termData) {
+                    openModal(termData);
+                }
+            });
+            
+            card.addEventListener('click', () => {
+                 const termData = allTerms.find(t => t.term === term.term);
+                if (termData) {
+                    openModal(termData);
+                }
+            });
+
+
+            card.appendChild(termTitle);
+            card.appendChild(snippet);
+            card.appendChild(detailsBtn);
+            termsOutput.appendChild(card);
+        });
+    }
+}
+
+// 3. MODAL FUNCTIONS
+function openModal(termData) {
+    const modal = document.getElementById('term-modal');
+    const modalTerm = document.getElementById('modal-term');
+    const modalCategory = document.getElementById('modal-category');
+    const modalDefinition = document.getElementById('modal-definition');
+    const modalExample = document.getElementById('modal-example');
+    
+    if (modal && modalTerm && modalDefinition && modalExample) {
+        modalTerm.textContent = termData.term;
+        modalCategory.textContent = termData.category;
+        modalDefinition.textContent = termData.definition;
+        modalExample.textContent = termData.example || 'No example available.';
+        modal.style.display = 'block';
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('term-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+
+// 4. TAB LOGIC (Must be globally accessible since HTML uses onclick)
+function openTab(evt, tabName) {
+    // Deactivate all tab content
+    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+    
+    // Deactivate all main tab buttons
+    document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+    
+    // Deactivate all sidebar nav buttons
+    document.querySelectorAll(".sidebar button").forEach(el => el.classList.remove("active-nav"));
+
+    // Activate selected tab content and button
+    document.getElementById(tabName).classList.add("active");
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add("active");
+    }
+
+    // Update corresponding sidebar button state
+    const sidebarBtnId = (tabName === 'terms' ? 'nav-terms-btn' : 'nav-video-btn');
+    const sidebarButton = document.getElementById(sidebarBtnId);
+    if (sidebarButton) {
+        sidebarButton.classList.add("active-nav");
+    }
+}
+
+// Function to switch tab from sidebar
+function openTabByName(tabName, clickedButton) {
+    // 1. Deactivate all sidebar buttons
+    document.querySelectorAll(".sidebar button").forEach(el => el.classList.remove("active-nav"));
+    // 2. Activate the clicked sidebar button
+    clickedButton.classList.add("active-nav");
+
+    // 3. Deactivate all tab content and main tab buttons
+    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+    
+    // 4. Activate the selected tab content
+    document.getElementById(tabName).classList.add("active");
+
+    // 5. Activate the corresponding main tab button
+    const mainTabButton = Array.from(document.querySelectorAll(".tab-btn")).find(btn => 
+        btn.textContent.trim().toLowerCase().includes(tabName.replace('-', ' '))
+    );
+    if (mainTabButton) {
+        mainTabButton.classList.add("active");
+    }
+}
+
+// Ensure openTab and openTabByName are available globally
+window.openTab = openTab;
+window.openTabByName = openTabByName;
+
+
+// 5. INITIALIZATION AND EVENT LISTENERS
+document.addEventListener('DOMContentLoaded', () => {
+    // Set initial active state for the sidebar and main tab
+    const initialSidebarBtn = document.getElementById('nav-terms-btn');
+    if (initialSidebarBtn) initialSidebarBtn.classList.add('active-nav');
+    
+    // Set the term count
+    const termCountElement = document.getElementById('term-count');
+    if (termCountElement) {
+        termCountElement.textContent = allTerms.length;
+    }
+
+    // 1. Render categories and terms
+    renderCategories();
+    renderTerms('','All');
+
+    // 2. Attach Category Filtering Listener
+    categoryList.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.matches('.category-filter-btn')) {
+            const category = target.getAttribute('data-category');
+            currentCategory = category;
+            searchInput.value = ''; // Clear search when selecting category
+            
+            // Update active state
+            document.querySelectorAll('.category-filter-btn').forEach(btn => btn.classList.remove('active'));
+            target.classList.add('active');
+            
+            renderTerms('', category);
+        }
+    });
+
+    // 3. Attach Search Listener
+    searchInput.addEventListener('input', (e) => {
+        // Clear category selection when searching
+        currentCategory = 'All';
+        document.querySelectorAll('.category-filter-btn').forEach(btn => btn.classList.remove('active'));
+        const allCategoryBtn = document.querySelector('.all-category-btn');
+        if(allCategoryBtn) allCategoryBtn.classList.add('active');
+        
+        renderTerms(e.target.value, 'All');
+    });
+
+    // 4. Modal Close Listeners
+    const closeButton = document.querySelector('.close-button');
+    if (closeButton) {
+        closeButton.addEventListener('click', closeModal);
+    }
+    window.addEventListener('click', (e) => {
+        const modal = document.getElementById('term-modal');
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+});
